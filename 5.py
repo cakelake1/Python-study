@@ -10,29 +10,29 @@ class Dwarf: # дварф
       self.__name = nam # имя
       self.__HP = 10; # здоровье, условные баллы
       self.__liters_drank = 0 # сколько выпито, литры
-      self.startWork(0)
+      self.__startWork__(0)
 
-  def get_name(self):
+  def __get_name__(self):
       return self.__name
 
-  def get_hp(self):
+  def __get_hp__(self):
       return self.__HP
 
-  def drink(self, liters):
+  def __drink__(self, liters):
       self.__liters_drank += liters
       if self.__liters_drank < 0:
           self.__liters_drank = 0
           
-  def get_liters_drank(self):
+  def __get_liters_drank__(self):
       return self.__liters_drank
 
-  def startWork(self, work):
+  def __startWork__(self, work):
       if work < 0 or work > 3:
           return
       self.__work_id = work # код текущей деятельности: 0-отдыхает, 1-выпивает, 
                        # 2-работает, 3-сражается
 
-  def get_work(self):
+  def __get_work__(self):
       return self.__work_id                     
 
 class Weapon: # оружие
@@ -53,7 +53,7 @@ class Weapon: # оружие
             self.__range = 1
 
     # dist -- расстояние до цели
-    def get_damage(self, dist):
+    def __get_damage__(self, dist):
         if dist < 0:
             return 0
 
@@ -81,23 +81,23 @@ class Animal: # животное
       elif knd == 2:
           self.__mass = 250
           self.__speed = 3
-  def get_name(self):
+  def __get_name__(self):
     return self.__name
-  def eat(self):
+  def __eat__(self):
       self.__mass += 0.5
-  def get_eat(self):
+  def __get_eat__(self):
       return self.__mass
 dwarf_worker = Dwarf("Боб");
-dwarf_worker.startWork(2)
-dwarf_worker.drink(2.5);
-print(dwarf_worker.get_name(), dwarf_worker.get_work(), dwarf_worker.get_liters_drank())
+dwarf_worker.__startWork__(2)
+dwarf_worker.__drink__(2.5);
+print(dwarf_worker.__get_name__(), dwarf_worker.__get_work__(), dwarf_worker.__get_liters_drank__())
 
 dog = Animal("Тузик", 1)
-dog.eat()
-print(dog.get_name(), dog.get_eat())
+dog.__eat__()
+print(dog.__get_name__(), dog.__get_eat__())
 
 bow = Weapon(2)
-print( bow.get_damage(40) )
+print( bow.__get_damage__(40) )
 
 
 # 5.2 :
@@ -120,17 +120,17 @@ class Car: # Автомобиль
     self.mass += 0.25
 
 class Volvo(Car):
-  def __init__(self, n,t,s,gruz):
-    super().__ini__(n,t,s)
+  def __init__(self, n,t,s):
+    super().__init__(n,t,s)
     self.name = n
     self.type = 2
     self.speed = s
     self.weight = 2
-    self.gruz = 1
+    self.dopgruz = 1
   def fullspeed(self):
     self.speed /= self.weight
   def fullmassa(self):
-    self.mass += self.gruz
+    self.weight += self.dopgruz
 
 class Porshe(Car):
   def __init__(self, n,t,s,aerod,loud):
@@ -140,26 +140,58 @@ class Porshe(Car):
     self.aero = aerod
     self.speed = s
     self.loud = loud
-  def rate(self,s):
-    self.speed *= self.aero
+  def rate(self,new_speed):
+    self.speed = new_speed
+    self.speed += self.speed * self.aero
   def volume(self,loud):
-    self.loud += loud / self.speed
+    self.loud += loud
 
 porshe_911 = Porshe("911", 3, 300, 0.2, 20)
-porshe_911.rate(300)
-porshe_911.volume(20)
+porshe_911.rate(340)
+porshe_911.volume(80)
 print(porshe_911.speed, porshe_911.loud)
+volvo_850 = Volvo("850", 2, 200)
+volvo_850.fullspeed()
+volvo_850.fullmassa()
+print(volvo_850.weight, volvo_850.speed)
 
 class Engine:
-  def __init__(self, w, p):
-    self.weight = w
-    self.power = p
+  def __init__(self, v, p, t):
+    self.motortype = t # 1 - бензиновый, 2 дизельный
+    self.volume = v # объем двигателя
+    self.power = p # мощность двигателя
 class v4(Engine):
-  def __init__(self, w, p, light, cool):
-    super().__init__(w, p)
-    self.light = 0.6
-    self.cool = 0.3
-def volvo_v4(self):
+  def __init__(self, v, p, t, kd):
+    super().__init__(v, p, t)
+    self.motortype = 2
+    self.kpddvig = kd # крутящий момент дизельного двигателя по отношению к бензиновому 
+    self.cool = 0.3 # охлаждение двигателя
+  def volvo_v4_diesel_kpd(self):
+    self.power -= self.power * self.kpddvig
+  def volvo_v4_diesel_p(self):
+    if self.motortype == 2:
+      self.volume += self.volume * self.cool
+    elif self.motortype == 1:
+      self.volume = self.volume
+class v6(Engine):
+  def __init__(self, v, p, t):
+    super().__init__(v, p, t)
+    self.motortype = 1
+  def v6_turbo(self,turbo):
+    self.volume = self.volume * turbo
+  def v6_petrol(self):
+    if self.motortype == 1:
+       self.power += self.power * 0.3
+      
+diesel = v4(1.6, 2000, 2, 0.3)
+diesel.volvo_v4_diesel_kpd()
+diesel.volvo_v4_diesel_p()
+print(diesel.power, diesel.volume)
+petrol = v6(1.6, 2000, 1)
+petrol.v6_turbo(1.4)
+petrol.v6_petrol()
+print(petrol.power, petrol.volume)
+  
     
 
     
