@@ -1,6 +1,6 @@
 import unittest
 from random import randint
-from dz_sort_massive import get_min_max
+from dz_sort_massive_12_dz import get_min_max
 
 class GetMinMaxTests(unittest.TestCase):
     def test_correct_max(self):
