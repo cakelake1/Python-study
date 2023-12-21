@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Рефлексия:
 # В этоланном решении, конечно по хитрому взят поиск из предыдущего решения. Но так как в предыдущей рефлексии я пообещал себе разобраться в своем решении и посмотреть, как можно его улучшить и упростить, глядя на эталонное решение. С уверенностью это сделал.
 # Я думаю за счет текущей задачи у меня открывается понимание выполнения решений, стало немного проще на душе и в коде.
@@ -16,23 +15,10 @@ def convert_image(current_ext, new_ext):
 convert_image('.jpg', '.jpeg')
 
     # 3.2. Дополните предыдущую функцию рисованием в центре изображения незаполненного квадрата, внутри которого будут написаны две строчки (вторая с новой строки):
-=======
-import os
-from PIL import Image, ImageDraw, ImageColor
-# def convert_image(current_ext, new_ext):
-#     for file in os.listdir(os.getcwd()):
-#         if file.endswith(current_ext):
-#             im = Image.open(file)
-#             im.save(file.replace(current_ext, new_ext))
-# convert_image('.jpg', '.jpeg')
-
-
->>>>>>> 918b098ed6d70b72af7eae7cc35772a869226e0d
 def convert_image(current_ext, new_ext):
     for file in os.listdir(os.getcwd()):
         if file.endswith(current_ext):
             im = Image.open(file)
-<<<<<<< HEAD
             draw = ImageDraw.Draw(im)
             square_size = 200
             square_left = (im.width - square_size) // 2
@@ -43,18 +29,4 @@ def convert_image(current_ext, new_ext):
             rgb_im.save(file.replace(current_ext, new_ext))
             del draw
 convert_image('.png', '.jpg')
-=======
-            #draw = ImageDraw.Draw(im)
-            sz = im.size
-            print(im.size)
-            draw = ImageDraw.Draw(im)
-            #rsz = im.resize((1920,1080))
-            #draw = ImageDraw.Draw(rsz)
-            draw.rectangle(((50, 50), (100, 100)), fill=128, width=4)
-            #draw.multiline_text( 'Hello,\nWorld!', align='center', font_size=40)
-            im.show()
-            #rgb_im = im.convert('RGB')
-            #rgb_im.save(file.replace(current_ext, new_ext))
-convert_image('.jpeg', '.png')
->>>>>>> 918b098ed6d70b72af7eae7cc35772a869226e0d
 
