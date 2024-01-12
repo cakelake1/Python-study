@@ -2,39 +2,17 @@
 # 5.1  Сделал поля приватными, методы видимо зря сделал приватными, но зато разобрался, как их также можно сделать приватными.
 # 5.2 Задача выполнена, не нравится только, что кратко не получилось.
 
-class Car: # Автомобиль
-  def __init__(self, n, t, s,):
-    self.name = n # название модели автомобиля
-    self.type = t #  тип авто : 1 - лимузин, 2 - универсал, 3 - спорткар
-    self.speed = s # Скорость автомобиля
-  def speed_change(self, new_speed):
-    self.speed = new_speed
-class Volvo(Car):
-  def __init__(self, n, t, s):
-    super().__init__(n, t, s)
-    
-class Porshe(Car):
-  def __init__(self, n, t, s):
-    super().__init__(n, t, s)
-    
-porshe_911 = Porshe("Порш 911", 3, 200)
-volvo_850 = Volvo("Вольво 850", 2, 100)
-cars = [porshe_911, volvo_850]
-for ani in cars:
-    ani.speed_change(300)
-print(porshe_911.speed, volvo_850.speed)
-
+# 4.1
 class Engine:
   def __init__(self, v, p, t):
     self.motortype = t # 1 - бензиновый, 2 дизельный
     self.volume = v # объем двигателя
     self.power = p # мощность двигателя
+
   def check_p(self, new_power):
       if new_power < 2000:
-        print ("Не хватает мощности")
-      else:
-        print ("Хватает")
-
+        self.power = 2000
+  
 class v6(Engine):
     def __init__(self, v, p, t):
       super().__init__(v, p, t)
@@ -42,13 +20,49 @@ class v6(Engine):
 class v4(Engine):
     def __init__(self, v, p, t):
       super().__init__(v, p, t)
-
+ 
 dvigv4 = v4(1.6, 2000, 2)
 dvigv6 = v6(1.6, 2000, 1)
 engines = [dvigv4, dvigv6]
 for ani in engines:
-  ani.check_p(3000)
+  ani.check_p(1000)
+class Car: # Автомобиль
+  def __init__(self, n, m, t, s, engine:Engine):
+    self.name = n # название модели автомобиля
+    self.mass = m # масса автомобиля
+    self.type = t #  тип авто : 1 - лимузин, 2 - универсал, 3 - спорткар
+    self.speed = s # Скорость автомобиля
+    self.engine = engine
+    
+  def speed_change(self, new_speed):
+    self.speed = new_speed
+  def new_kinetic_energy(self):
+    self.kinetic_energy = 0.5 * self.mass * (self.speed ** 2)
+  def max_speed(self):
+    self.speed = ((2 * self.engine.power) / self.mass) ** 0.5
+    return self.speed 
+    
 
+class Volvo(Car):
+  def __init__(self, n, m, t, s, engine):
+    super().__init__(n, m, t, s, engine)
+    
+class Porshe(Car):
+  def __init__(self, n, m, t, s, engine):
+    super().__init__(n, m, t, s, engine)
+    
+porshe_911 = Porshe("Порш 911", 85, 3, 190, 1000)
+volvo_850 = Volvo("Вольво 850", 1000, 2, 100, 1000)
+cars = [porshe_911, volvo_850]
+for ani in cars:
+    ani.speed_change(300)
+print(porshe_911.speed, volvo_850.speed)
+porshe_911.new_kinetic_energy()
+print(porshe_911.kinetic_energy)
+e = Engine(1,666,1)
+c = Car('Porshe333',1,1,1, e)
+c.max_speed()
+print(c.max_speed())
 
 # 4.2:
 class Car2: # Автомобиль
@@ -93,10 +107,6 @@ for j in range (len(a)):
     print(a[j])
 
 # Такой вывод, потому что мы хотим вывести объект, который состоит из ячеек памяти, и в каждой ячейке есть свое значение
-
-
-
-
 
 # 4.3:
 class Cat():
