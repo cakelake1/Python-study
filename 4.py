@@ -5,7 +5,7 @@
 # 4.1
 class Engine:
   def __init__(self, v, p, t):
-    self.motortype = t # 1 - бензиновый, 2 дизельный
+    self.motortype = t # 1 - бензиновый, 2 дизельный, 3 гибридный
     self.volume = v # объем двигателя
     self.power = p # мощность двигателя
 
@@ -13,24 +13,27 @@ class Engine:
       if new_power < 2000:
         self.power = 2000
   
-class v6(Engine):
+class dvs(Engine):
     def __init__(self, v, p, t):
       super().__init__(v, p, t)
 
-class v4(Engine):
-    def __init__(self, v, p, t):
+class hybrid(Engine):
+    def __init__(self, v, p, t, em, b):
+      self.electromotor = em
+      self.battery = b
       super().__init__(v, p, t)
  
-dvigv4 = v4(1.6, 2000, 2)
-dvigv6 = v6(1.6, 2000, 1)
+dvigv4 = dvs(1.6, 2000, 2)
+dvigv6 = hybrid(1.6, 2000, 3, 3, 70000)
 engines = [dvigv4, dvigv6]
 for ani in engines:
   ani.check_p(1000)
-class Car: # Автомобиль
+
+class Car_Type: # Тип Автомобиля
   def __init__(self, n, m, t, s, engine:Engine):
     self.name = n # название модели автомобиля
     self.mass = m # масса автомобиля
-    self.type = t #  тип авто : 1 - лимузин, 2 - универсал, 3 - спорткар
+    self.type = t #  тип авто : 1 - лимузин, 2 - универсал, 3 - спорткар, 4 - грузовой
     self.speed = s # Скорость автомобиля
     self.engine = engine
     
@@ -43,29 +46,33 @@ class Car: # Автомобиль
     return self.speed 
     
 
-class Volvo(Car):
+class Car(Car_Type):
   def __init__(self, n, m, t, s, engine):
     super().__init__(n, m, t, s, engine)
     
-class Porshe(Car):
-  def __init__(self, n, m, t, s, engine):
+class Truck(Car_Type):
+  def __init__(self, n, m, t, s, engine, carrying, bw, bh, bl):
+    self.body_width = bw
+    self.body_height = bh
+    self.body_lenght = bl
+    self.carrying = carrying # Грузоподъемность
     super().__init__(n, m, t, s, engine)
     
-porshe_911 = Porshe("Порш 911", 85, 3, 190, 1000)
-volvo_850 = Volvo("Вольво 850", 1000, 2, 100, 1000)
-cars = [porshe_911, volvo_850]
-for ani in cars:
+MAN5 = Truck("МАН5", 8500, 4, 90, 3000, 10000, 2, 2, 3)
+volvo_850 = Car("Вольво 850", 1000, 2, 100, 1000)
+car_Types = [volvo_850]
+for ani in car_Types:
     ani.speed_change(300)
-print(porshe_911.speed, volvo_850.speed)
-porshe_911.new_kinetic_energy()
-print(porshe_911.kinetic_energy)
+print(MAN5.speed, volvo_850.speed)
+MAN5.new_kinetic_energy()
+print(MAN5.kinetic_energy)
 e = Engine(1,666,1)
-c = Car('Porshe333',1,1,1, e)
+c = Car_Type('Porshe333',1,1,1, e)
 c.max_speed()
 print(c.max_speed())
 
 # 4.2:
-class Car2: # Автомобиль
+class Car_Type2: # Автомобиль
   def __init__(self, n, t, s,):
     self.name = n # название модели автомобиля
     self.type = t #  тип авто : 1 - лимузин, 2 - универсал, 3 - спорткар
@@ -74,24 +81,28 @@ class Car2: # Автомобиль
     self.speed = new_speed
   def foo(self,new_name):
     self.name = new_name
-class Volvo2(Car2):
+class Car2(Car_Type2):
   def __init__(self, n, t, s):
     super().__init__(n, t, s)
   def foo(self,new_name):
     self.name = "Уникальный Вольво"
 
-class Porshe2(Car2):
-  def __init__(self, n, t, s):
+class Truck2(Car_Type2):
+  def __init__(self, n, t, s, carrying, bw, bh, bl):
+    self.body_width = bw
+    self.body_height = bh
+    self.body_lenght = bl
+    self.carrying = carrying # Грузоподъемность
     super().__init__(n, t, s)
     
   def foo(self,new_name):
     self.name = "Уникальный Порш 912"
   
-porshe_912 = Porshe2("222", 3, 300)
-volvo_851 = Volvo2("333", 3, 300)
-porshe_912.foo("111")
+MAN6 = Truck2("222", 3, 110, 9000,2 ,2 ,8 )
+volvo_851 = Car2("333", 3, 300)
+MAN6.foo("111")
 volvo_851.foo("111")
-print(porshe_912.name, volvo_851.name)
+print(MAN6.name, volvo_851.name)
 
 
 import random
