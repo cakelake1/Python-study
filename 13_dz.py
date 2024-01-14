@@ -24,12 +24,12 @@ def opentwo_and_summ():
                 d +=int(s.rstrip())      
             continue  
         except ValueError:
-            print("Содержимое файла испорчено")
+            
             break
         finally:
             f.close()
     return d 
-print(opentwo_and_summ())
+opentwo_and_summ()
 
 # 3.3
 
@@ -58,7 +58,7 @@ except:
       
 finally:
     rc.close()
-print(cats_list)
+
 
 
         
