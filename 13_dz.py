@@ -24,11 +24,10 @@ def opentwo_and_summ():
                 d +=int(s.rstrip())      
             continue  
         except ValueError:
-            
-            break
+            return [d,1]
         finally:
             f.close()
-    return d 
+    return [d,0] 
 opentwo_and_summ()
 
 # 3.3
