@@ -24,7 +24,7 @@ def opentwo_and_summ():
                 d +=int(s.rstrip())      
             continue  
         except ValueError:
-            return [d,1]
+            return [d,1] # программа выполнена с ошибкой
         finally:
             f.close()
     return [d,0] 
