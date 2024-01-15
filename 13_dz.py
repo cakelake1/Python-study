@@ -16,17 +16,19 @@ for i in range(1,11):
         
 def opentwo_and_summ():
     d = 0
-    for x in range(1,223):
-        x = int(random.randint(1,10))
-        f = open(str(x)+".txt", "rt")
-        try: 
-            for s in f:
-                d +=int(s.rstrip())      
-            continue  
-        except ValueError:
-            return [d,1] # программа выполнена с ошибкой
-        finally:
-            f.close()
+    try: 
+        for x in range(1,223):
+            x = int(random.randint(1,10))
+            f = open(str(x)+".txt", "rt")
+            for i in range(3):
+                    s = f.readline()
+                    d += int(s)
+    except ValueError:
+                return [d,1] # ошибка в значениях файла
+    except OSError:
+                return [d,2] # ошибка в открытии файла
+    finally:
+                f.close()
     return [d,0] 
 opentwo_and_summ()
 
