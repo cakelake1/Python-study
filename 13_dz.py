@@ -26,7 +26,7 @@ def opentwo_and_summ():
                     d += int(s)
     except ValueError:
                 return [d,1] # ошибка в значениях файла
-    except OSError:
+    except FileNotFoundError:
                 return [d,2] # ошибка в открытии файла
     finally:
                 f.close()
