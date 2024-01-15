@@ -15,8 +15,9 @@ for i in range(1,11):
 # 3.2 :
         
 def opentwo_and_summ():
-    d = 0
+    
     try: 
+        d = 0
         for x in range(1,223):
             x = int(random.randint(1,10))
             f = open(str(x)+".txt", "rt")
