@@ -14,15 +14,23 @@
 
 
 import random
+
+my_keys = []    
 my_dictionary = {}
-for i in range(1,100):
-    my_dictionary[i] = random.randint(1,100)
-for key, value in my_dictionary.items():
-    print(key, value)
-print(format(my_dictionary))
-for i in range(1,100):
-    my_dictionary.pop(i)
-print(my_dictionary)
+
+for i in range(1,101):
+    my_keys.append(i)
+    
+for i in range(1,101):
+    key = int(i)
+    my_dictionary[key] = 'random' + " " + str(random.randint(1,100))
+
+for key in my_dictionary.keys():
+    if key in my_dictionary:
+        value = my_dictionary[key]
+print(format(my_dictionary.items()))
+my_dictionary.clear()
+print(format(my_dictionary.items()))
 
 
 # 2. Напишите функцию, которая получает список из 100 значений (сгенерируйте его заранее с числами в диапазоне от 1 до 10) и число N, и выдаёт список из тех значений в этом списке, которые повторяются не менее N раз. Используйте словарь для этого.
@@ -32,19 +40,18 @@ import random
 
 a = [random.randint(1, 10) for _ in range(100)]
 
-def func1(value, n):
+def one_hundred_values(r_value, N):
     my_dictionary = {}
-    n_dict = []
-    for i in value:
-        if my_dictionary.get(i):
+    list_dict = []
+    for i in r_value:
+        if i in my_dictionary:
             my_dictionary[i] += 1
-            if my_dictionary[i] == n:
-                n_dict.append(i)
         else:
             my_dictionary[i] = 1
-            if my_dictionary[i] == n:
-                n_dict.append(i)
-    return n_dict
 
-    
-print(func1(a,12))
+        if my_dictionary[i] == N:
+            list_dict.append(i)
+    return list_dict
+
+print(one_hundred_values(a,12))
+print(a)
