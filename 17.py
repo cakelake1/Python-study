@@ -26,7 +26,7 @@ for i in range(1,101):
     my_dictionary[key] = 'random' + " " + str(random.randint(1,100))
 
 for key in my_dictionary.keys():
-    if key in my_dictionary:
+    if my_dictionary.get(key):
         value = my_dictionary[key]
 print(format(my_dictionary.items()))
 my_dictionary.clear()
@@ -44,7 +44,7 @@ def one_hundred_values(r_value, N):
     my_dictionary = {}
     list_dict = []
     for i in r_value:
-        if i in my_dictionary:
+        if my_dictionary.get(i):
             my_dictionary[i] += 1
         else:
             my_dictionary[i] = 1
