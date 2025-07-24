@@ -57,7 +57,7 @@ def PatternUnlock(N, hits):
         not_formatted_result = not_formatted_result + path_on_phone
     not_formatted_result = round(not_formatted_result,5) # окрушляем до 5 знаков
     s = format(not_formatted_result, '.5f') # форматируем в строку с 5 знаками
-    result = s.rstrip('0').rstrip('.') # обязательно сначала 0 убираем, потом только точку, разделять также нельзя
+    result = s.replace('.', '').replace('0', '') # обязательно сначала 0 убираем, потом только точку, разделять также нельзя
     return result
 
 
@@ -65,3 +65,5 @@ def PatternUnlock(N, hits):
 print (PatternUnlock(5,[2,3,4,2,8]))
 print(PatternUnlock(1,[1]))
 print (PatternUnlock(6,[2,3,4,2,8,9]))
+print(PatternUnlock(2,[4,2]))
+print(PatternUnlock(2,[6,8]))
