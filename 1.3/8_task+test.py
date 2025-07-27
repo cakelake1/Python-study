@@ -37,18 +37,19 @@ int SumOfThe(int N, int [] data)
     for element in data:
         if 2* element == total:
             return element
-    return None # по условию не возможно, поэтому удалаем. одно из решений, попробуем избавится от оператора if """
+    return None  """# по условию не возможно, поэтому удалаем. одно из решений, попробуем избавится от оператора if
 """ def SumOfThe(N,data): # неявное использование булевой математики
     total = sum(data)
     result = 0
     for x in data:
-        flag = (2 * x == total)
-        result += x * flag
-    return result """
+        if 2 * x == total
+        return x
+    return 0 """
 
 # и еще проще можно сделать
 def SumOfThe(N,data):
     return sum(data) // 2
+print(SumOfThe(7,[100, -50, 10, -25, 90, -35, 90]))
 print(SumOfThe(5,[10,-25, -45, -35, 5]))
 print(SumOfThe(4, [100, 20, 30, 150]))
 print(SumOfThe(3, [-10, 20, 10]))
