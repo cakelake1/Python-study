@@ -20,8 +20,50 @@
 string TheRabbitsFoot(string s, bool encode)
 получает исходную строку s и либо зашифровывает её (encode = true), либо расшифровывает (encode = false), только конечно без исходных пробелов """
 
-Итого как я вижу решение данной задачи:
+""" Итого как я вижу решение данной задачи:
 while True - пишем код по зашифровке: 
                         1.удаляем их строки все пробелы и получаем длину N. по этой длине получаем корень числа.
-                        2.НАДО ПОНЯТЬ как получить верхнюю и нижнюю границу извлеченного корня, затем сравниваем длину, если она >=, то 
+                        2.НАДО ПОНЯТЬ как получить верхнюю и нижнюю границу извлеченного корня, затем сравниваем длину, если она >, то прибавляем единицу к строки или приравниваем к  значению столбца.
+                        3. Уточнил, используем import math, math.isqrt 3.8+ и math.ceil
+                        4. Получаем значение матрицы(строка, столбец) и вычисляем значения построчно и по столбцу, затем полученные значения объединяем и получаем зашифрованный код.
+                        5. Для дешифровки мы используем сплит по пробелу """
 
+import math
+def TheRabbitsFoot(s, encode):
+    while encode is True:
+        s_no_space = s.replace(" ", "")
+        N = len(s_no_space)
+        matrix_row = math.isqrt(N)
+        matrix_col = math.ceil(math.sqrt(N))
+        while matrix_row * matrix_col < N:
+            matrix_row += 1
+        encryption_columns = []
+        for j in range(matrix_col):
+            col = []
+            for i in range(matrix_row):
+                index = i * matrix_col + j
+                if index < N:
+                    col.append(s_no_space[index])
+            encryption_columns.append(''.join(col))
+            print(col)
+        print(encryption_columns)
+        return ' '.join(encryption_columns)
+    while encode is False:
+        groups = s.split()
+        matrix_col = len(groups)
+        matrix_row = max(len(group) for group in groups)
+        decription_list = []
+        for i in range(matrix_row):
+            for j in range(matrix_col):
+                if i < len(groups[j]):
+                    decription_list.append(groups[j][i])
+        return ''.join(decription_list)
+print(TheRabbitsFoot('отдай мою кроличью лапку', True))
+            
+print(TheRabbitsFoot('омоюу толл дюиа акчп йрьк', False))
+print(TheRabbitsFoot("abcdefghi", True))
+print(TheRabbitsFoot("adg beh cfi", False))
+print(TheRabbitsFoot("abcdefgh", True))
+print(TheRabbitsFoot("adg beh cf", False))
+print(TheRabbitsFoot("abcdefghij", True))
+print(TheRabbitsFoot("aei bfj cg dh", False)) 
