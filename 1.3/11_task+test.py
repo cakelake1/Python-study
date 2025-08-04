@@ -33,6 +33,7 @@ def BigMinus(s1, s2):
         list.append(str(digit))
     result = ''.join(reversed(list)) # Переворачиваем
     result = result.lstrip('0') # убираем нули
-    return result or '0' #  нужно ли тут ноль выставлять, чтобы None не получилось
+    return result  or '0' #  нужно ли тут ноль выставлять, чтобы None не получилось - нужно!! при вычитании например 100-100 пулучится 0
 print(BigMinus("1234567891","1"))
 print(BigMinus("1","321"))
+print(BigMinus("100","100"))

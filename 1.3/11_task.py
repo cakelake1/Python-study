@@ -11,4 +11,4 @@ def BigMinus(s1, s2):
         list.append(str(digit))
     result = ''.join(reversed(list))
     result = result.lstrip('0')
-    return result
+    return result or '0'
