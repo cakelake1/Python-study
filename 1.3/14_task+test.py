@@ -18,7 +18,7 @@ int Unmanned(int L, int N, int [][3] track)
     Сначала я хотел залезть в матрицу и подобрать удобную формулу для корректного расчета, но это у меня не получилось, т.е. для определенной дороги еще можно подобрать, но если значения поменяются - я сяду в лужу
     ЗАтем я решил, что нужно ввести переменные для подсчета текущего времени в пути, стартового времени, времени работы светофоров 
     Самое сложное здесь было понять, как вычислить текущую позицию времени, относительно светофора. """
-def Unmanned(L, N, track):
+""" def Unmanned(L, N, track):
     cur_time = 0 # текущее время
     prev_time = 0 # предыдушее время
     for position,r,g in track: # для позиции светофора, красного и зеленого сигнала
@@ -29,6 +29,22 @@ def Unmanned(L, N, track):
         if time < r: # Если позиция меньше длительности красного светофора
             cur_time += r - time #  текущее время со временем красного световора минус текушая фаза
     result = L - prev_time + cur_time   # выходим из цикла, считаем общее время
+    return result """
+def Unmanned(L, N, track):
+    cur_time = 0 
+    prev_time = 0 
+    for position,r,g in track:
+        if position > L:
+            continue
+        cur_time += position - prev_time 
+        prev_time = position 
+        traffic_lights = r + g
+        if traffic_lights ==0:
+            continue 
+        time = cur_time % traffic_lights 
+        if time < r: 
+            cur_time += r - time 
+    result = L - prev_time + cur_time   
     return result
 print(Unmanned(10,2,[(3,5,5),(5,2,2)])) # 12
 print(Unmanned(100,0,[(0,0,0)])) # 100
@@ -39,3 +55,4 @@ print(Unmanned(80,1,[(80,25,5)]))# 85
 print(Unmanned(100,2,[(30,15,15),(60,10,20)])) # 115
 print(Unmanned(20,3,[(3,5,5),(7,4,2),(15,3,1)]))# 24
 print(Unmanned(50,4,[(10,15,5),(20,10,20),(35,20,10),(45,5,25)]))# 70
+print(Unmanned(10,2,[(11,5,5),(15,2,2)]))# 10
