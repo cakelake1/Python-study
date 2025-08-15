@@ -1,27 +1,30 @@
-def PrintingCosts(letter):
-    my_dictionary = {
-    ' ': 0, '!': 9, '"': 6, '#': 24, '$': 29, '%': 22,
-    '&': 24, "'": 3, '(': 12, ')': 12, '*': 17, '+': 13,
-    ',': 7, '-': 7, '.': 4, '/': 10, '0': 22, '1': 19,
-    '2': 22, '3': 23, '4': 21, '5': 27, '6': 26, '7': 16,
-    '8': 23, '9': 26, ':': 8, ';': 11, '<': 10, '=': 14,
-    '>': 10, '?': 15, '@': 32, 'A': 24, 'B': 29, 'C': 20,
-    'D': 26, 'E': 26, 'F': 20, 'G': 25, 'H': 25, 'I': 18,
-    'J': 18, 'K': 21, 'L': 16, 'M': 28, 'N': 25, 'O': 26,
-    'P': 23, 'Q': 31, 'R': 28, 'S': 25, 'T': 16, 'U': 23,
-    'V': 19, 'W': 26, 'X': 18, 'Y': 14, 'Z': 22, '[': 18,
-    '\\': 10,  # Правильное экранирование обратного слеша
-    ']': 18, '^': 7, '_': 8, '`': 3, 'a': 23,
-    'b': 25, 'c': 17, 'd': 25, 'e': 23, 'f': 18, 'g': 30,
-    'h': 21, 'i': 15, 'j': 20, 'k': 21, 'l': 16, 'm': 22,
-    'n': 18, 'o': 20, 'p': 25, 'q': 25, 'r': 13, 's': 21,
-    't': 17, 'u': 17, 'v': 13, 'w': 19, 'x': 13, 'y': 24,
-    'z': 19, '{': 18, '|': 12, '}': 18, '~': 9
- }
-    summ = 0
-    for word in letter:
-        summ += my_dictionary.get(word, 23)
-    return summ
-print(PrintingCosts('tsdasd'))
-print(PrintingCosts("Hello!"))  # 25 (H) + 23 (e) + 16 (l) + 16 (l) + 20 (o) + 9 (!) = 109
-print(PrintingCosts("Python 3.9"))  # Считает сумму для всех символов
+def TankRush(H1, W1, S1, H2, W2, S2):
+    # Создаем матрицы символов
+    map1 = [list(s.strip()) for s in S1.split() if s.strip()]
+    map2 = [list(s.strip()) for s in S2.split() if s.strip()]
+    
+    if len(map1) != H1 or any(len(row) != W1 for row in map1):
+        return False
+    if len(map2) != H2 or any(len(row) != W2 for row in map2):
+        return False
+        
+    # Поиск шаблона
+    for i in range(H1 - H2 + 1):
+        for j in range(W1 - W2 + 1):
+            match = True
+            for k in range(H2):
+                for l in range(W2):
+                    if map1[i+k][j+l] != map2[k][l]:
+                        match = False
+                        break
+                if not match:
+                    break
+            if match:
+                return True
+    print(f"map1: {map1}")
+    print(f"map2: {map2}")
+    print(f"H1={H1}, W1={W1}, H2={H2}, W2={W2}")
+    for row in map1:
+        print(f"Row length: {len(row)}")
+    return False
+print(TankRush(4, 4, "1234 5678 9012 3456", 2, 2, "78 01")) # True (искомая карта с позиции (1,2))
