@@ -43,4 +43,4 @@ print(MaximumDiscount(1, [500]))  # 0
 print(MaximumDiscount(12, [i*10 for i in range(12,0,-1)]))  # 210
 print(MaximumDiscount(3, [0, 0, 0]))  # 0
 print(MaximumDiscount(6, [0]*6))      # 0
-print(MaximumDiscount(0, [0]))        # 0 (нельзя сформировать тройку)
+print(MaximumDiscount(1, [0]))        # 0 (нельзя сформировать тройку)
