@@ -58,8 +58,8 @@ def LineAnalysis(line):
            (all(not i for i in words) or all(i for i in words))) # пустые и не пустые сегменты не смешиваются
 
     
-
-print(LineAnalysis("*..*..*..*"))    # True
+print(LineAnalysis("*..*"))    # True
+""" print(LineAnalysis("*..*..*..*"))    # True
 print(LineAnalysis("*..*...*..*"))   # False
 print(LineAnalysis("*.**.*"))        # False
 print(LineAnalysis("*.......*"))     # True
@@ -124,4 +124,4 @@ print(LineAnalysis("*..*"))          # True (минимальный непуст
 print(LineAnalysis("*...*"))         # True (минимальный непустой)
 print(LineAnalysis("*....*"))        # True (минимальный непустой)
 print(LineAnalysis("*.****"))        # False (разные сегменты)
-print(LineAnalysis("****.*"))        # False (разные сегменты)
+print(LineAnalysis("****.*"))        # False (разные сегменты) """
