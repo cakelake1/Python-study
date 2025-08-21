@@ -17,7 +17,8 @@ bool MisterRobot(int N, int [] data)
 # Значит нам нужно сделать всего две проверки на четность цирф и на четность инверсии.
 # количество инверсий мы узнаем сравнив каждый элемент с последующим элементом, чтобы исключить сравнение между собой, повторные сравнения.
 # В начале для оптимизации добавим проверку на количество нечетных значений, в конце на количество четных инверсий
-import time
+# ОшибКа!!! НЕ важно четное количество чисел или нечетное, важно только чет нечет инверсий.
+""" import time
 def MisterRobot(N, data):
     invers = 0
     even =(N % 2 == 1)
@@ -28,7 +29,15 @@ def MisterRobot(N, data):
             if data[i] > data[j]:
                 invers +=1
     result = (invers % 2 == 0)
-    return result
+    return result """
+import time
+def MisterRobot(N, data):
+    invers = 0
+    for i in range(N):
+        for j in range(i+1,N):
+            if data[i] > data[j]:
+                invers +=1
+    return invers % 2 == 0
 
 
 # Должны возвращать True
