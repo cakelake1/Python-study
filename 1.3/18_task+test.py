@@ -17,7 +17,11 @@ bool MisterRobot(int N, int [] data)
 # Значит нам нужно сделать всего две проверки на четность цирф и на четность инверсии.
 # количество инверсий мы узнаем сравнив каждый элемент с последующим элементом, чтобы исключить сравнение между собой, повторные сравнения.
 # В начале для оптимизации добавим проверку на количество нечетных значений, в конце на количество четных инверсий
-import time
+# ОшибКа!!! НЕ важно четное количество чисел или нечетное, важно только чет нечет инверсий.
+# Ошибка 2!!!! Не выполнены требования задачи, а именно я считал количество инверсий, а это делать нельзя, можно только менять три элемента местами, продолжим тогда.
+# 
+
+""" import time
 def MisterRobot(N, data):
     invers = 0
     even =(N % 2 == 1)
@@ -28,8 +32,107 @@ def MisterRobot(N, data):
             if data[i] > data[j]:
                 invers +=1
     result = (invers % 2 == 0)
-    return result
+    return result """
+""" import time
+def MisterRobot(N, data):
+    invers = 0
+    for i in range(N):
+        for j in range(i+1,N):
+            if data[i] > data[j]:
+                invers +=1
+    return invers % 2 == 0 """
+""" def MisterRobot(N, data):
+    copy_data_array = data[:]
+    for i in range(N):
+        position = -1:
+        for j in range(i, N):
+            if copy_data_array[j] == i + 1:
+                position = j
+                break
+        if position == i:
+            continue
+    while position > i:
+        if position >=i+2:
+            a, b, c = copy_data_array[position-2], copy_data_array[position-1], copy_data_array[position]
+            copy_data_array[position-2] = b
+            copy_data_array[position-1] = c
+            copy_data_array[position] = a
+            position -= 2
+        elif position == 1 and i - 1 >=2:
+            a, b, c = copy_data_array[0], copy_data_array[1], copy_data_array[2]
+            copy_data_array[0] = b
+            copy_data_array[1] = c
+            copy_data_array[2] = a
+            position = 2
+        else:
+            return False
+    return True """
 
+""" def MisterRobot(N, data):
+    arr = list(data)
+    circle = True
+    while circle:
+        circle = False
+        for i in range(N-2):
+            a, b, c = arr[i], arr[i+1], arr[i+2]
+            if a <= b <= c:
+                continue
+            a1, b1, c1 = b ,c , a
+            if a1 <= b1 <= c1:
+                arr[i], arr[i+1], arr[i+2] = a1, b1, c1
+                circle = True
+                continue
+            a2, b2, c2 = c, a, b
+            if a2 <= b2 <= c2:
+                arr[i], arr[i+1], arr[i+2] = a2, b2, c2
+                circle = True
+                continue
+    for i in range(N-1):
+        if arr[i] > arr[i+1]:
+            print(arr[i], arr[i+1])
+            return False
+    return True """
+""" import time
+def MisterRobot(N, data):
+    arr = list(data)
+    for i in range(N):
+        while arr[i] != i + 1:
+            p = i
+            while p < N and arr[p] != i + 1:
+                p += 1
+            if p == N:
+                return False
+            if p - i >= 2:
+                a, b, c = arr[p-2], arr[p-1], arr[p]
+                arr[p-2] = b
+                arr[p-1] = c
+                arr[p] = a
+            else:
+                if i < N - 2:
+                    a, b, c = arr[i], arr[i+1], arr[i+2]
+                    arr[i] = b
+                    arr[i+1] = c
+                    arr[i+2] = a
+                else:
+                    return False
+    return True """
+import time
+def MisterRobot(N, data):
+    arr = list(data)
+    for i in range(N):
+        while arr[i] != i + 1:
+            p = i
+            while p < N and arr[p] != i + 1:
+                p += 1
+            if p == N:
+                return False
+            if p - i >= 2:
+                arr[p-2], arr[p-1], arr[p] = arr[p-1], arr[p], arr[p-2]
+            elif i < N - 2:
+                arr[i], arr[i+1], arr[i+2] = arr[i+1], arr[i+2], arr[i]
+            else:
+                return False
+    return True
 
 # Должны возвращать True
 print(MisterRobot(5, [1,2,3,4,5]))     # Уже отсортирован
@@ -47,6 +150,8 @@ print(MisterRobot(6, [1,3,2,4,6,5]))  # True (2 инверсии)
 
 # Должны вернуть False (N чётное, инверсий нечётное)  
 print(MisterRobot(6, [3,1,2,4,6,5]))  # False (3 инверсии)
+print(MisterRobot(10,[2, 3, 1, 4, 5, 6, 7, 8, 9, 10]))
+print(MisterRobot(10, [2, 1, 3, 4, 5, 6, 7, 8, 9, 10]))
 # Тест производительности
 start = time.time()
 for _ in range(100000):  # 100 000 раз!
