@@ -45,6 +45,4 @@ def TreeOfLife(H, W, N, tree):
                 s +='+'
         result.append(s)
     return result
-    
 
-print(TreeOfLife(3,4,12,[".+..","..+.",".+.."]))
