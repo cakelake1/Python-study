@@ -18,8 +18,7 @@ boolean TransformTransform(int A[], int N)
 Рефлексируем:
     Нам дают задачу, нам дают алгоритм готовый, который просто написать. Думаю от нас ждут итерацию по алгоритму, вроде как она подходит, тем более мы получаем результат True or False.
      Итак итерация здесь не нужна, нужна функция в функции и сделать двойную трансофрмацию функции, напишем сам алгоритм, делаем, трасформацию и двойную трансофрмацию, проблема порявилась в примерах, ИИ выдает некорреткные пример, которые после проверки становятся коррректными  """
-def TransformTransform(A, N):
-    def S(massivea):
+def S(massivea):
         B = []
         n = len(massivea)
         for i in range(n):
@@ -28,6 +27,7 @@ def TransformTransform(A, N):
                 max_value = max(massivea[j:k+1])
                 B.append(max_value)
         return B
+def TransformTransform(A, N):
     first_transform = S(A)
     transform_double = S(first_transform)
     result = sum(transform_double) 
