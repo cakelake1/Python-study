@@ -30,8 +30,12 @@ boolean Football(int F[], int N)
 3. Сделаем простую проверку на сортировку, запишем ее в отдельную функцию
 4. Сделаем функцию проверки на замену двух элементов
 5. Напишем еще одну функцию на проверку разворота
+6. При проверке на сервере Ошибка или не пройден тест:Football([1,2,3], 3) = false
+Нужно в условие задачи добавить, что если при 
  """
 def Football(F,N):
+    if check_sorted(F):
+        return False
     return check_swap(F) or check_reverse(F)
 
 def check_sorted(array):
@@ -77,8 +81,15 @@ def check_reverse(array):
     temp_array2 = array.copy()
     temp_array2[start_number:end_number+1] = temp_array2[start_number:end_number+1][::-1]
     return check_sorted(temp_array2)
+print(Football([1,2,3], 3))                     # True - один элемент
+print(Football([3,2, 1], 3))                  # True - обмен двух элементов
+print(Football([1, 7, 5,3,9], 5))
+print(Football([9,5,3,7,1], 5))                     # True - один элемент
+print(Football([1, 4, 3, 2,5], 5))                  # True - обмен двух элементов
+print(Football([1, 3, 2], 3))               # True - обмен 3 и 2               # True - обмен 3 и 2
 print("Дополнительные тесты:")
-print(Football([1], 1))                     # True - один элемент
+print(Football([1], 1))
+print(Football([1,2], 2))                      # True - один элемент
 print(Football([2, 1], 2))                  # True - обмен двух элементов
 print(Football([1, 3, 2], 3))               # True - обмен 3 и 2
 print(Football([2, 1, 3, 4], 4))            # True - обмен 2 и 1
@@ -91,7 +102,7 @@ print(Football([1, 2, 3, 6, 5, 4], 6))      # True - разворот [6,5,4]
 # Случаи, которые нельзя упорядочить
 print(Football([3, 1, 2], 3))               # False 
 print(Football([2, 3, 1], 3))               # False
-print(Football([4, 2, 3, 1], 4))            # False
+print(Football([4, 2, 3, 1], 4))            # True
 print(Football([1, 5, 2, 4, 3], 5))         # False
 print(Football([3, 2, 4, 1, 5], 5))         # False
 
