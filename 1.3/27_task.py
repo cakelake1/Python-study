@@ -46,9 +46,3 @@ def check_reverse(array):
     temp_array2 = array.copy()
     temp_array2[start_number:end_number+1] = temp_array2[start_number:end_number+1][::-1]
     return check_sorted(temp_array2)
-print(Football([1,2,3], 3))                     # True - один элемент
-print(Football([3,2, 1], 3))                  # True - обмен двух элементов
-print(Football([1, 7, 5,3,9], 5))
-print(Football([9,5,3,7,1], 5))                     # True - один элемент
-print(Football([1, 4, 3, 2,5], 5))                  # True - обмен двух элементов
-print(Football([1, 3, 2], 3))
