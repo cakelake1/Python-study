@@ -6,3 +6,4 @@ def Keymaker(k):
                 doors[j] = '1'
             else:
                 doors[j] = '0'
+    return ''.join(doors)
