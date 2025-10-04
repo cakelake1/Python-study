@@ -28,3 +28,10 @@ print(sum_digit(-1))
 print(sum_digit(12))
 print(sum_digit(344))
 print(sum_digit(1024)) """
+def length_check_pop(r_list):
+    if r_list == []:
+        return 0
+    else:
+        r_list.pop(0)
+        return 1 + length_check_pop(r_list)
+print(length_check_pop([1,2,3,4]))
