@@ -58,10 +58,17 @@ print_even_numbers(1234)
 print_even_numbers(1203456789101112)
 print_even_numbers([1,2,3,4]) """
 def print_even_numbers_list(r_list2):
-    if r_list2 == []:
+    if not r_list2:
         return 0
     if r_list2[0] % 2 == 0:
         print(r_list2[0], end='')
     return print_even_numbers_list(r_list2[1:])
 print_even_numbers_list([1,2,3,4])
-print_even_numbers_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2])
+""" def print_even_index_list(r_list3):
+    if not r_list3:
+        return 0
+    print(r_list3[0], end='')
+    if len(r_list3) > 2:
+        return print_even_index_list(r_list3[2:])
+print_even_index_list([1,2,3,4])
+print_even_index_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2]) """
