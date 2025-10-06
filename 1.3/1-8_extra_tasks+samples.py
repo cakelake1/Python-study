@@ -34,4 +34,16 @@ def length_check_pop(r_list):
     else:
         r_list.pop(0)
         return 1 + length_check_pop(r_list)
-print(length_check_pop([1,2,3,4]))
+""" print(length_check_pop([1,2,3,4])) """
+def poliandrom_check(r_word):
+    r_word =r_word.lower().replace(' ','')
+    if len(r_word) <= 1:
+        return True
+    if r_word[0] != r_word[-1]:
+        return False
+    return poliandrom_check(r_word[1:-1])
+print(poliandrom_check('a'))
+print(poliandrom_check('ab'))
+print(poliandrom_check('anna'))
+print(poliandrom_check('Anna'))
+print(poliandrom_check('acab'))
