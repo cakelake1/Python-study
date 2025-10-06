@@ -42,8 +42,26 @@ def poliandrom_check(r_word):
     if r_word[0] != r_word[-1]:
         return False
     return poliandrom_check(r_word[1:-1])
-print(poliandrom_check('a'))
+""" print(poliandrom_check('a'))
 print(poliandrom_check('ab'))
 print(poliandrom_check('anna'))
 print(poliandrom_check('Anna'))
-print(poliandrom_check('acab'))
+print(poliandrom_check('acab')) """
+""" def print_even_numbers(r_num):
+    if r_num == 0:
+        return 0
+    print_even_numbers(r_num//10)
+    last_num = r_num % 10
+    if last_num % 2 == 0:
+        print(last_num, end='')
+print_even_numbers(1234)
+print_even_numbers(1203456789101112)
+print_even_numbers([1,2,3,4]) """
+def print_even_numbers_list(r_list2):
+    if r_list2 == []:
+        return 0
+    if r_list2[0] % 2 == 0:
+        print(r_list2[0], end='')
+    return print_even_numbers_list(r_list2[1:])
+print_even_numbers_list([1,2,3,4])
+print_even_numbers_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2])

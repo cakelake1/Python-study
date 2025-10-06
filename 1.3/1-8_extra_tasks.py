@@ -20,4 +20,14 @@ def poliandrom_check(r_word):
     if r_word[0] != r_word[-1]:
         return False
     return poliandrom_check(r_word[1:-1])
+def print_even_numbers(r_num):
+    if r_num % 2 == 0:
+        print(r_num)
+    return print_even_numbers(r_num)
+def print_even_numbers_list(r_list2):
+    if r_list2 == []:
+        return 0
+    if r_list2[0] % 2 == 0:
+        print(r_list2[0], end='')
+    return print_even_numbers_list(r_list2[1:])
 
