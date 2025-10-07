@@ -48,7 +48,9 @@ def poliandrom_check(r_word, start = 0, end = 0):
 print(poliandrom_check('ab'))
 print(poliandrom_check('anna'))
 print(poliandrom_check('Anna'))
-print(poliandrom_check('acab')) """
+print(poliandrom_check('acab'))
+print(poliandrom_check(''))
+print(poliandrom_check("?!@#"))  """
 """ def print_even_numbers(r_num):
     if r_num == 0:
         return 0
@@ -70,7 +72,6 @@ def print_even_index_list(r_list3, start = 0):
     if start >= len(r_list3):
         return 0
     print(r_list3[start], end='')
-    if len(r_list3) > 2:
-        return print_even_index_list(r_list3, start + 2)
+    return print_even_index_list(r_list3, start + 2)
 print_even_index_list([1,2,3,4])
 print_even_index_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2])

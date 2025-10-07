@@ -37,6 +37,5 @@ def print_even_index_list(r_list3, start = 0):
     if start >= len(r_list3):
         return 0
     print(r_list3[start], end='')
-    if len(r_list3) > 2:
-        return print_even_index_list(r_list3, start + 2)
+    return print_even_index_list(r_list3, start + 2)
 
