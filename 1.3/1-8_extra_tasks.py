@@ -16,26 +16,32 @@ def length_check_pop(r_list):
     r_list.pop(0)
     return 1 + length_check_pop(r_list)
 
-def poliandrom_check(r_word, start = 0, end = 0):
-    if end == 0:
-        r_word =r_word.lower().replace(' ','')
-        end = len(r_word) - 1
-    if start >= end:
+def is_palindrom(s):
+    s = s.lower().replace(' ','')
+    if len(s) < 2 :
         return True
-    if r_word[start] != r_word[end]:
+    if s[0] != s[-1]:
         return False
-    return poliandrom_check(r_word, start + 1, end - 1)
+    chars = list(s)
+    chars.pop(0)
+    chars.pop()
+    s = ''.join(chars)
+    return is_palindrom(s)
 
-def print_even_numbers_list(r_list2, start = 0):
-    if start >= len(r_list2):
+def print_even_numbers_list(r_list2):
+    if len(r_list2) == 0:
         return 0
-    if r_list2[start] % 2 == 0:
-        print(r_list2[start], end='')
-    return print_even_numbers_list(r_list2, start + 1)
+    if r_list2[0] % 2 == 0:
+        print(r_list2[0], end='')
+    r_list2.pop(0)
+    return print_even_numbers_list(r_list2)
 
-def print_even_index_list(r_list3, start = 0):
-    if start >= len(r_list3):
+def print_even_index_list(r_list3):
+    if len(r_list3) == 0:
         return 0
-    print(r_list3[start], end='')
-    return print_even_index_list(r_list3, start + 2)
+    print(r_list3[0], end='')
+    r_list3.pop(0)
+    if len(r_list3) > 0 :
+        r_list3.pop(0)
+    return print_even_index_list(r_list3)
 
