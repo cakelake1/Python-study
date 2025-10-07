@@ -108,7 +108,10 @@ print_even_index_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2]) """
 def is_sec_poliandrom(s):
     if len(s) < 2:
         return True
-    return s[0] == s[-1] and is_sec_poliandrom(s[1:-1])
+    if s[0] != s[-1]:
+        return False
+    s = s.replace(s[0], '', 1).replace(s[-1], '', 1)
+    return is_sec_poliandrom(s)
 print(is_palindrom('a'))
 print(is_palindrom('ab'))
 print(is_palindrom('anna'))
