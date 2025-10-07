@@ -45,3 +45,7 @@ def print_even_index_list(r_list3):
         r_list3.pop(0)
     return print_even_index_list(r_list3)
 
+def is_sec_poliandrom(s):
+    if len(s) < 2:
+        return True
+    return s[0] == s[-1] and is_sec_poliandrom(s[1:-1])

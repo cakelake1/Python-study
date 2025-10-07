@@ -59,13 +59,13 @@ def is_palindrom(s):
     chars.pop()
     s = ''.join(chars)
     return is_palindrom(s)
-print(is_palindrom('a'))
+""" print(is_palindrom('a'))
 print(is_palindrom('ab'))
 print(is_palindrom('anna'))
 print(is_palindrom('Anna'))
 print(is_palindrom('acab'))
 print(is_palindrom(''))
-print(is_palindrom('An naa'))
+print(is_palindrom('An naa')) """
 """ 
 print(poliandrom_check('a'))
 print(poliandrom_check('ab'))
@@ -105,3 +105,14 @@ def print_even_index_list(r_list3):
 print_even_index_list([0,1,2,3,4,5])
 print_even_index_list([1,2,3,4])
 print_even_index_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2]) """
+def is_sec_poliandrom(s):
+    if len(s) < 2:
+        return True
+    return s[0] == s[-1] and is_sec_poliandrom(s[1:-1])
+print(is_palindrom('a'))
+print(is_palindrom('ab'))
+print(is_palindrom('anna'))
+print(is_palindrom('Anna'))
+print(is_palindrom('acab'))
+print(is_palindrom(''))
+print(is_palindrom('An naa'))
