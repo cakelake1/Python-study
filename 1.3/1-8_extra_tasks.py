@@ -34,7 +34,7 @@ def inner_even_numbers_list(r_list2, start_index):
         print(r_list2[start_index], end='')
     return inner_even_numbers_list(r_list2, start_index + 1)
 def print_even_numbers_list(r_list2):
-    inner_even_numbers_list(r_list2, 1)
+    return inner_even_numbers_list(r_list2, 1)
 
 def inner_even_index_list(r_list3, start_index):
     if start_index >= len(r_list3):
@@ -42,5 +42,5 @@ def inner_even_index_list(r_list3, start_index):
     print(r_list3[start_index], end='')
     return inner_even_index_list(r_list3, start_index + 2)
 def print_even_index_list(r_list3):
-    inner_even_index_list(r_list3, 0)
+    return inner_even_index_list(r_list3, 0)
 
