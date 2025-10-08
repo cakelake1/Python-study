@@ -104,7 +104,7 @@ def inner_even_numbers_list(r_list2, start_index):
         print(r_list2[start_index], end='')
     return inner_even_numbers_list(r_list2, start_index + 1)
 def print_even_numbers_list(r_list2):
-    inner_even_numbers_list(r_list2, 1)
+    return inner_even_numbers_list(r_list2, 1)
 
 """ print_even_numbers_list([1,2,3,4])
 print_even_numbers_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2]) """
@@ -114,8 +114,8 @@ def inner_even_index_list(r_list3, start_index):
     print(r_list3[start_index], end='')
     return inner_even_index_list(r_list3, start_index + 2)
 def print_even_index_list(r_list3):
-    inner_even_index_list(r_list3, 0)
-""" print_even_index_list([0,1,2,3,4])
+    return inner_even_index_list(r_list3, 0)
+print_even_index_list([0,1,2,3,4])
 print_even_index_list([0,1,2,3,4,5])
 print_even_index_list([1,2,3,4])
-print_even_index_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2]) """
+print_even_index_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2])
