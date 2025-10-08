@@ -47,9 +47,8 @@ def length_check_pop(r_list):
     r_word.pop(0)
     r_word.pop(end)
     return poliandrom_check(r_word) """
-def is_palindrom(s):
-    if len(s) > 1 :
-        s = s.lower().replace(' ','')
+""" def is_palindrom1(s):
+    s = s.lower().replace(' ','')
     if len(s) < 2 :
         return True
     if s[0] != s[-1]:
@@ -58,14 +57,28 @@ def is_palindrom(s):
     chars.pop(0)
     chars.pop()
     s = ''.join(chars)
-    return is_palindrom(s)
-""" print(is_palindrom('a'))
-print(is_palindrom('ab'))
+    return is_palindrom(s) """
+def inner_is_palindrom(line, start_index, end_index):
+    if line[start_index] != line[end_index]:
+        return False
+    if start_index >= end_index:
+        return True
+    return inner_is_palindrom(line, start_index + 1, end_index - 1)
+def is_palindrom(s):
+    if len(s) < 2 :
+        return True
+    return inner_is_palindrom(s, 0, len(s) - 1)
+   
+
+print(is_palindrom('a'))
+print(is_palindrom('aba'))
 print(is_palindrom('anna'))
 print(is_palindrom('Anna'))
 print(is_palindrom('acab'))
 print(is_palindrom(''))
-print(is_palindrom('An naa')) """
+print(is_palindrom('An na'))
+print(is_palindrom('aAbcbaa'))
+print(is_palindrom('abca'))
 """ 
 print(poliandrom_check('a'))
 print(poliandrom_check('ab'))
@@ -84,38 +97,25 @@ print(poliandrom_check("?!@#"))  """
 print_even_numbers(1234)
 print_even_numbers(1203456789101112)
 print_even_numbers([1,2,3,4]) """
-def print_even_numbers_list(r_list2):
-    if len(r_list2) == 0:
+def inner_even_numbers_list(r_list2, start_index):
+    if start_index >= len(r_list2):
         return 0
-    if r_list2[0] % 2 == 0:
-        print(r_list2[0], end='')
-    r_list2.pop(0)
-    return print_even_numbers_list(r_list2)
+    if r_list2[start_index] % 2 == 0:
+        print(r_list2[start_index], end='')
+    return inner_even_numbers_list(r_list2, start_index + 1)
+def print_even_numbers_list(r_list2):
+    inner_even_numbers_list(r_list2, 1)
+
 """ print_even_numbers_list([1,2,3,4])
 print_even_numbers_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2]) """
-def print_even_index_list(r_list3):
-    if len(r_list3) == 0:
+def inner_even_index_list(r_list3, start_index):
+    if start_index >= len(r_list3):
         return 0
-    print(r_list3[0], end='')
-    r_list3.pop(0)
-    if len(r_list3) > 0 :
-        r_list3.pop(0)
-    return print_even_index_list(r_list3)
+    print(r_list3[start_index], end='')
+    return inner_even_index_list(r_list3, start_index + 2)
+def print_even_index_list(r_list3):
+    inner_even_index_list(r_list3, 0)
 """ print_even_index_list([0,1,2,3,4])
 print_even_index_list([0,1,2,3,4,5])
 print_even_index_list([1,2,3,4])
 print_even_index_list([1,2,0,3,4,5,6,7,8,9,1,0,1,1,1,2]) """
-def is_sec_poliandrom(s):
-    if len(s) < 2:
-        return True
-    if s[0] != s[-1]:
-        return False
-    s = s.replace(s[0], '', 1).replace(s[-1], '', 1)
-    return is_sec_poliandrom(s)
-print(is_palindrom('a'))
-print(is_palindrom('ab'))
-print(is_palindrom('anna'))
-print(is_palindrom('Anna'))
-print(is_palindrom('acab'))
-print(is_palindrom(''))
-print(is_palindrom('An naa'))
