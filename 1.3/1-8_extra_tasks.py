@@ -44,3 +44,25 @@ def inner_even_index_list(r_list3, start_index):
 def print_even_index_list(r_list3):
     return inner_even_index_list(r_list3, 0)
 
+def inner_second_max_list(r_list4, start_index, first_max, second_max):
+    if start_index == len(r_list4):
+        return second_max
+    current = r_list4[start_index]
+    new_first = first_max
+    new_second = second_max
+    if current > first_max:
+        new_second = first_max
+        new_first = current
+    elif current > second_max:
+        new_second = current
+    return inner_second_max_list(r_list4, start_index + 1, new_first, new_second)
+def second_max_list(r_list4):
+    if len(r_list4) < 2:
+        return None
+    if r_list4[0] > r_list4[1]:
+        first = r_list4[0]
+        second = r_list4[1]
+    else:
+        first = r_list4[1]
+        second = r_list4[0]
+    return inner_second_max_list(r_list4, 2, first, second)

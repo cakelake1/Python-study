@@ -128,7 +128,7 @@ def inner_second_max_list(r_list4, start_index, first_max, second_max):
     if current > first_max:
         new_second = first_max
         new_first = current
-    elif current > second_max:
+    if current > second_max:
         new_second = current
     return inner_second_max_list(r_list4, start_index + 1, new_first, new_second)
 def second_max_list(r_list4):
@@ -143,3 +143,7 @@ def second_max_list(r_list4):
     return inner_second_max_list(r_list4, 2, first, second)
 print(second_max_list([1,2,3,4,5,5,6,6]))  # 
 print(second_max_list([1,2,3,4,5,5,6,6]))  #
+print(second_max_list([1,2,3]))
+print(second_max_list([1,2,3,3]))
+print(second_max_list([1,2]))
+print(second_max_list([1]))        
