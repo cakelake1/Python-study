@@ -167,3 +167,14 @@ def all_files(path, items, index):
 def find_all_files(path):
     items = os.listdir(path)
     return all_files(path, items, 0)
+
+def build_parentheses_combinations(current_string, opened, closed, total_pairs, results):
+    if opened == total_pairs and closed == total_pairs:
+        results.append(current_string)
+        return
+    if opened < total_pairs:
+        new_string = current_string + '('
+        build_parentheses_combinations(new_string, opened + 1, closed, total_pairs, results)
+    if closed < opened:
+        new_string = current_string + ')'
+        build_parentheses_combinations(new_string, opened, closed + 1, total_pairs, results)
