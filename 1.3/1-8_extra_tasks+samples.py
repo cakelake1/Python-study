@@ -149,32 +149,43 @@ print(second_max_list([1,2]))
 print(second_max_list([1]))  """ 
 import os
 
-def all_files(path, items, index):
+def all_files_finder(path, items, index):
     if index >= len(items):
         return []
     item = items[index]
     full_path = os.path.join(path, item)
     if os.path.isfile(full_path):
         current_files = [full_path]
-    elif os.path.isdir(full_path):
+    if os.path.isdir(full_path):
         subdir_items = os.listdir(full_path)
-        current_files = all_files(full_path, subdir_items, 0)
-    else:
-        current_files = []
-    rest_files = all_files(path, items, index + 1)
+        current_files = all_files_finder(full_path, subdir_items, 0)
+    rest_files = all_files_finder(path, items, index + 1)
     return current_files + rest_files
 
 def find_all_files(path):
     items = os.listdir(path)
-    return all_files(path, items, 0)
+    return all_files_finder(path, items, 0)
 
-def build_parentheses_combinations(current_string, opened, closed, total_pairs, results):
+print(find_all_files("C:\\Users\\николай\\Desktop\\front\\skillbox\\2.7_editorconfig__1205\\Python-study\\1.3\\__pycache__"))
+
+def find_all_files(path):
+    items = os.listdir(path)
+    return all_files_finder(path, items, 0)
+
+def bracket_comb(current_string, opened, closed, total_pairs, results):
     if opened == total_pairs and closed == total_pairs:
         results.append(current_string)
-        return
+        return 
     if opened < total_pairs:
         new_string = current_string + '('
-        build_parentheses_combinations(new_string, opened + 1, closed, total_pairs, results)
+        bracket_comb(new_string, opened + 1, closed, total_pairs, results)
     if closed < opened:
         new_string = current_string + ')'
-        build_parentheses_combinations(new_string, opened, closed + 1, total_pairs, results)
+        bracket_comb(new_string, opened, closed + 1, total_pairs, results)
+def bracket(n):
+    combinations = []
+    if n > 0:
+        bracket_comb("", 0, 0, n, combinations)
+    return combinations
+result = bracket(4)
+print(result)

@@ -66,3 +66,39 @@ def second_max_list(r_list4):
         first = r_list4[1]
         second = r_list4[0]
     return inner_second_max_list(r_list4, 2, first, second)
+
+import os
+
+def all_files_finder(path, items, index):
+    if index >= len(items):
+        return []
+    item = items[index]
+    full_path = os.path.join(path, item)
+    if os.path.isfile(full_path):
+        current_files = [full_path]
+    if os.path.isdir(full_path):
+        subdir_items = os.listdir(full_path)
+        current_files = all_files_finder(full_path, subdir_items, 0)
+    rest_files = all_files_finder(path, items, index + 1)
+    result = current_files + rest_files
+    return result
+
+def find_all_files(path):
+    items = os.listdir(path)
+    return all_files_finder(path, items, 0)
+
+def bracket_comb(current_string, opened, closed, total_pairs, results):
+    if opened == total_pairs and closed == total_pairs:
+        results.append(current_string)
+        return 
+    if opened < total_pairs:
+        new_string = current_string + '('
+        bracket_comb(new_string, opened + 1, closed, total_pairs, results)
+    if closed < opened:
+        new_string = current_string + ')'
+        bracket_comb(new_string, opened, closed + 1, total_pairs, results)
+def bracket(n):
+    combinations = []
+    if n > 0:
+        bracket_comb("", 0, 0, n, combinations)
+    return combinations
