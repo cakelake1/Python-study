@@ -141,9 +141,29 @@ def second_max_list(r_list4):
         first = r_list4[1]
         second = r_list4[0]
     return inner_second_max_list(r_list4, 2, first, second)
-print(second_max_list([1,2,3,4,5,5,6,6]))  # 
+""" print(second_max_list([1,2,3,4,5,5,6,6]))  # 
 print(second_max_list([1,2,3,4,5,5,6,6]))  #
 print(second_max_list([1,2,3]))
 print(second_max_list([1,2,3,3]))
 print(second_max_list([1,2]))
-print(second_max_list([1]))        
+print(second_max_list([1]))  """ 
+import os
+
+def all_files(path, items, index):
+    if index >= len(items):
+        return []
+    item = items[index]
+    full_path = os.path.join(path, item)
+    if os.path.isfile(full_path):
+        current_files = [full_path]
+    elif os.path.isdir(full_path):
+        subdir_items = os.listdir(full_path)
+        current_files = all_files(full_path, subdir_items, 0)
+    else:
+        current_files = []
+    rest_files = all_files(path, items, index + 1)
+    return current_files + rest_files
+
+def find_all_files(path):
+    items = os.listdir(path)
+    return all_files(path, items, 0)
