@@ -149,7 +149,7 @@ print(second_max_list([1,2]))
 print(second_max_list([1]))  """ 
 import os
 
-def all_files_finder(path, items, index):
+""" def all_files_finder(path, items, index):
     if index >= len(items):
         return []
     item = items[index]
@@ -164,9 +164,24 @@ def all_files_finder(path, items, index):
 
 def find_all_files(path):
     items = os.listdir(path)
-    return all_files_finder(path, items, 0)
+    return all_files_finder(path, items, 0) """
 
-print(find_all_files("C:\\Users\\николай\\Desktop\\front\\skillbox\\2.7_editorconfig__1205\\Python-study\\1.3\\__pycache__"))
+""" def find_all_files(path, level = 1):
+    print('Level=', level, 'Content:', os.listdir(path))
+    for i in os.listdir(path):
+        if os.path.isdir(path+'\\'+i):
+            print('Спускаемся', path + '\\' +i)
+            find_all_files(path + '\\' + i, level + 1)
+            print('Возвращаемся')
+find_all_files("C:\\Users\\Nick Dor\\Downloads\\zapret-discord-youtube-1.8.5") """
+def find_all_files(path):
+    items = os.listdir(path)
+    for item in items:
+        item_path = os.path.join(path, item)
+        print(item)
+        if os.path.isdir(item_path):
+            find_all_files(item_path)
+find_all_files("C:\\Users\\Nick Dor\\Downloads\\zapret-discord-youtube-1.8.5")
 
 def find_all_files(path):
     items = os.listdir(path)
@@ -187,5 +202,5 @@ def bracket(n):
     if n > 0:
         bracket_comb("", 0, 0, n, combinations)
     return combinations
-result = bracket(4)
-print(result)
+""" result = bracket(4)
+print(result) """

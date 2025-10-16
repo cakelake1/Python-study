@@ -102,3 +102,11 @@ def bracket(n):
     if n > 0:
         bracket_comb("", 0, 0, n, combinations)
     return combinations
+
+def find_all_files(path):
+    items = os.listdir(path)
+    for item in items:
+        item_path = os.path.join(path, item)
+        print(item)
+        if os.path.isdir(item_path):
+            find_all_files(item_path)
