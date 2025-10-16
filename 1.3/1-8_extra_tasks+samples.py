@@ -176,16 +176,18 @@ def find_all_files(path):
 find_all_files("C:\\Users\\Nick Dor\\Downloads\\zapret-discord-youtube-1.8.5") """
 def find_all_files(path):
     items = os.listdir(path)
+    result = []
     for item in items:
         item_path = os.path.join(path, item)
-        print(item)
+        result.append(item)
         if os.path.isdir(item_path):
-            find_all_files(item_path)
-find_all_files("C:\\Users\\Nick Dor\\Downloads\\zapret-discord-youtube-1.8.5")
+            result.extend(find_all_files(item_path))
+    return result
+print(find_all_files("C:\\Users\\Nick Dor\\Downloads\\zapret-discord-youtube-1.8.5"))
 
-def find_all_files(path):
+""" def find_all_files(path):
     items = os.listdir(path)
-    return all_files_finder(path, items, 0)
+    return all_files_finder(path, items, 0) """
 
 def bracket_comb(current_string, opened, closed, total_pairs, results):
     if opened == total_pairs and closed == total_pairs:

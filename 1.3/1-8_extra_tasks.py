@@ -110,3 +110,13 @@ def find_all_files(path):
         print(item)
         if os.path.isdir(item_path):
             find_all_files(item_path)
+
+def find_all_files(path):
+    items = os.listdir(path)
+    result = []
+    for item in items:
+        item_path = os.path.join(path, item)
+        result.append(item)
+        if os.path.isdir(item_path):
+            result.extend(find_all_files(item_path))
+    return result
