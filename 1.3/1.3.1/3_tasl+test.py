@@ -70,7 +70,7 @@ EEC_help([1,1], [1,1]) = true
 """ Мои мысли по поводу решения этой задачи:
 Сделать хэш таблицу в которую поместить значения """
 
-def EEC_help(arr1, arr2):
+""" def EEC_help(arr1, arr2):
     if len(arr1) != len(arr2) :
         return False
     dict_arr1, dict_arr2 = {}, {}
@@ -86,7 +86,23 @@ print(EEC_help([1,2,3], [1,2,3,4])) # false
 print(EEC_help([1,2,3], [1,2,3])) # true
 print(EEC_help([1,3,2], [1,2,3])) # true
 print(EEC_help([1,3,2,3], [1,2,2,3])) # False
-print(EEC_help([1,1], [1,1]))  # true
+print(EEC_help([1,1], [1,1]))  # true """
         
+def EEC_help(arr1, arr2):
+    if len(arr1) != len(arr2) :
+        return False
+    dict_arr = {}
+    for i in arr1:
+        dict_arr[i] = dict_arr.get(i, 0) + 1
+    
+    for i in arr2:
+        if i not in dict_arr or dict_arr[i] == 0:
+            return False
+        dict_arr[i] -= 1
+    return True
 
-
+print(EEC_help([1,2,3], [1,2,3,4])) # false
+print(EEC_help([1,2,3], [1,2,3])) # true
+print(EEC_help([1,3,2], [1,2,3])) # true
+print(EEC_help([1,3,2,3], [1,2,2,3])) # False
+print(EEC_help([1,1], [1,1]))  # true
