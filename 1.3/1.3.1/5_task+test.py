@@ -1,4 +1,4 @@
-﻿
+""" ﻿
 
  
 
@@ -75,7 +75,7 @@ https://github.com/cakelake1/Python-study/blob/main/1.3/1.3.1/5.md
 
 Таким образом, во второй половине мы фиксируем повторное вхождение числа, и когда устанавливаем в ней бит из 0 в 1, увеличиваем счётчик повторных числе на 1.
 
-Совсем не сложно запрограммировать прямой доступ к i-му биту в таком нативном массиве байтов, это буквально 2-3 инструкции на считывание и на перезапись i-го бита.
+Совсем не сложно запрограммировать прямой доступ к i-му биту в таком нативном массиве байтов, это буквально 2-3 инструкции на считывание и на перезапись i-го бита. """
 
 
 """ def massdriver(activate):
@@ -88,7 +88,7 @@ https://github.com/cakelake1/Python-study/blob/main/1.3/1.3.1/5.md
             return dict_activate[i]
         dict_activate[i] += 1
     return -1 """
-def massdriver(activate):
+""" def massdriver(activate):
     if len(activate) < 2 :
         return -1
     dict_activate = {}
@@ -99,6 +99,21 @@ def massdriver(activate):
                 result = dict_activate[j]
         else:
             dict_activate[j] = i
+    return result """
+def massdriver(activate):
+    if len(activate) < 2 :
+        return -1
+    dict_activate = {}
+    result = -1
+    for i, j in enumerate(activate):
+        if j in dict_activate:
+            dict_activate[j][0] += 1
+            if dict_activate[j][0] == 2:
+                first_index = dict_activate[j][1]
+                if result == -1 or first_index < result:
+                    result = first_index
+        else:
+            dict_activate[j] = [1,i]
     return result
 
 print(massdriver([1,2,3])) # false
