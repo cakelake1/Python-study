@@ -126,14 +126,14 @@ def helper_spiral_matrix(matrix, row_s, col_s, n, m, result):
         result.append(matrix[i][m - 1])
     #Step 5 - Print Bottom Row
     # Last row is not same as first
-    if (n - 1) != row_s:
-        for i in range (m-2, col_s - 1, -1): 
-            result.append(matrix[n - 1][i])
+    #if (n - 1) != row_s:
+    for i in range (m-2, col_s - 1, -1): 
+        result.append(matrix[n - 1][i])
     #Step 6 - Print Left Column
     # Last column is not same as first
-    if (m - 1) != col_s:
-        for i in range(n-2, row_s,  -1):
-            result.append(matrix[i][col_s])
+    #if (m - 1) != col_s:
+    for i in range(n-2, row_s,  -1):
+        result.append(matrix[i][col_s])
 #Step 7 Call recursively
     return helper_spiral_matrix(matrix, row_s+1, col_s+1, n-1, m-1, result)
 
