@@ -65,7 +65,7 @@ def artificial_muscle_fibers(arr):
     byte_array = bytearray(8192)
     duplicate_elements = 0
     for item in arr:
-        bit_position = item -1
+        bit_position = item - 1
         byte_index = bit_position //8
         bit_index = bit_position % 8
         eight_bit_mask = 1 << bit_index
@@ -122,7 +122,7 @@ print(f"[] = {artificial_muscle_fibers([])}")                                   
 print(f"[1, 3, 5, 7, 9] = {artificial_muscle_fibers([1, 3, 5, 7, 9])}")                    # 0
 
 print("\n=== Тесты с большими числами ===")
-print(f"[100, 200, 300, 100, 400, 200] = {artificial_muscle_fibers([100, 200, 300, 100, 400, 200])}")  # 3
+print(f"[100, 200, 300, 100, 400, 200] = {artificial_muscle_fibers([100, 200, 300, 100, 400, 200])}")  # 2
 
 print("\n=== Сложные тесты ===")
 print(f"[1, 2, 1, 3, 2, 4, 3, 5, 4] = {artificial_muscle_fibers([1, 2, 1, 3, 2, 4, 3, 5, 4])}")  # 4

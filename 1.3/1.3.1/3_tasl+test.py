@@ -70,13 +70,13 @@ EEC_help([1,1], [1,1]) = true
 """ Мои мысли по поводу решения этой задачи:
 Сделать хэш таблицу в которую поместить значения """
 
-""" def EEC_help(arr1, arr2):
+def EEC_help(arr1, arr2):
     if len(arr1) != len(arr2) :
         return False
     dict_arr1, dict_arr2 = {}, {}
-    for i in range(len(arr1)):
-        dict_arr1[arr1[i]] = 1 + dict_arr1.get(arr1[i], 0)
-        dict_arr2[arr2[i]] = 1 + dict_arr2.get(arr2[i], 0)
+    for i in arr1:
+        dict_arr1[i] = 1 + dict_arr1.get(i, 0)
+        dict_arr2[i] = 1 + dict_arr2.get(i, 0)
     for j in dict_arr1:
         if dict_arr1[j] != dict_arr2.get(j,0):
             return False
@@ -86,9 +86,9 @@ print(EEC_help([1,2,3], [1,2,3,4])) # false
 print(EEC_help([1,2,3], [1,2,3])) # true
 print(EEC_help([1,3,2], [1,2,3])) # true
 print(EEC_help([1,3,2,3], [1,2,2,3])) # False
-print(EEC_help([1,1], [1,1]))  # true """
-        
-def EEC_help(arr1, arr2):
+print(EEC_help([1,1], [1,1]))  # true
+  
+""" def EEC_help(arr1, arr2):
     if len(arr1) != len(arr2) :
         return False
     dict_arr = {}
@@ -105,4 +105,4 @@ print(EEC_help([1,2,3], [1,2,3,4])) # false
 print(EEC_help([1,2,3], [1,2,3])) # true
 print(EEC_help([1,3,2], [1,2,3])) # true
 print(EEC_help([1,3,2,3], [1,2,2,3])) # False
-print(EEC_help([1,1], [1,1]))  # true
+print(EEC_help([1,1], [1,1]))  # true """
