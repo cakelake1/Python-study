@@ -1,0 +1,16 @@
+def helper_spiral_matrix(matrix, row_s, col_s, n, m, result):
+    if row_s >= n or col_s >= m:
+        return result
+    for i in range (col_s, m):
+        result.append(matrix[row_s][i])
+    for i in range (row_s + 1, n):
+        result.append(matrix[i][m - 1])
+    if (n - 1) != row_s:
+        for i in range (m-2, col_s - 1, -1): 
+            result.append(matrix[n - 1][i])
+    if (m - 1) != col_s:
+        for i in range(n-2, row_s,  -1):
+            result.append(matrix[i][col_s])
+    return helper_spiral_matrix(matrix, row_s+1, col_s+1, n-1, m-1, result)
+def spiral_matrix(n,m, matrix):
+    return helper_spiral_matrix(matrix,0, 0, n, m,[])
