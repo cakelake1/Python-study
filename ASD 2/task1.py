@@ -24,7 +24,6 @@ class LinkedList:
                 return node
             node = node.next
         return None
-
     def find_all(self, val):
         result = []
         node = self.head
@@ -97,6 +96,4 @@ def test_Linked_list():
     print("Тест 4: Вставка")
     lst.insert(lst.find(10), Node(15))
     print("После встаcвки 15 после 10:", lst.get_all_values())
-
-
 test_Linked_list()
