@@ -40,16 +40,18 @@ class DynArray:
         if self.count == self.capacity:
             self.resize(2*self.capacity)
         
-        for j in range(self.count-1, i-1,-1):
+        for j in range(self.count - 1, i - 1,-1):
             self.array[j+1] = self.array[j]
         self.array[i] = itm
         self.count += 1
         
     def delete(self, i):
-        self.__getitem__(i)
+        if i < 0 or i >= self.count:
+            raise IndexError('Индекс вне диапазона')
         for j in range(i, self.count - 1):
             self.array[j] = self.array[j+1]
         self.count -= 1
-        if (self.count < self.capacity / 2) and self.capacity > 16:
+        self.array[self.count - 1] = None
+        if self.count * 4 <= self.capacity and self.capacity > 16:
             new_capacity = max(16, self.capacity // 2)
             self.resize(new_capacity)
