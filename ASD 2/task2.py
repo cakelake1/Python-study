@@ -88,7 +88,6 @@ class LinkedList2:
             else:
                 self.tail = newNode
 
-
     def add_in_head(self, newNode):
         if self.head is None:
             self.head = newNode

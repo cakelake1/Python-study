@@ -1,5 +1,5 @@
 2.10.*
-
+Надо понимать, что нам достаточно в логике поменять шаги. Следующий шаг сделать предыдущим, и предыдущий следующим. И в конце поменять начало и конец местами
  def reverse(self):
         node = self.head
         while node is not None:
@@ -11,6 +11,8 @@
         self.head = self.tail
         self.tail = temp_head
 2.11.*
+Мы начинаем предполагать как вообще узнать есть ли цикл через функцию. На первый взгляд приходит в голову создать хэш талицу и вносить туду значения, заодно сравнивая их. Если немного погуглить то находим очень легкий и интересный алгоритм зайца и черепахи или "Алгоритм Флойда"/
+Основной смысл у нас один указатель делает один шаг, а второй два шага и сравниваем их, главное условие правильно задать, чтобы дойти корректно до конца списка.
 def has_cycle(self):
         if self.head is None:
             return False
@@ -25,6 +27,7 @@ def has_cycle(self):
 
 
 2.12.*
+Тут я немного читерю, я написал функцию, которая выдает по шагам значения и просто их сортирует по питонски за О(n) и затем собирает в связанный список заново.
 def get_all_values(self):
         values = []
         node = self.head
@@ -40,26 +43,43 @@ def sort(self):
             self.add_in_tail(Node(value))
 
 2.13.*
-def merge_sorted_lists(list1, list2):
-        values1 = list1.get_all_values()
-        values2 = list2.get_all_values()
-        result = LinkedList2()
-        i, j = 0, 0
-        while i < len(values1) and j < len(values2):
-            if values1[i] <= values2[j]:
-                result.add_in_tail(Node(values1[i]))
-                i += 1
-            else:
-                result.add_in_tail(Node(values2[j]))
-                j += 1
-        while i < len(values1):
-            result.add_in_tail(Node(values1[i]))
-            i += 1
-        while j < len(values2):
-            result.add_in_tail(Node(values2[j]))
-            j += 1
-        return result 
+Получаю значения двух списков, сортирую их, результируюй список сортирвоать нельзя. Использую слияние двух отсортированных списков
+функция сортироваки на основе функции получения значений:
+def sort_list(self):
+        if self.head is None or self.head.next is None:
+            return
+        values = self.get_all_values()
+        values.sort()
+        current = self.head
+        for value in values:
+            current.value = value
+            current = current.next
+
+def merge_sorted_lists_efficient(list1, list2):
+    list1.sort_list()
+    list2.sort_list()
+    result = LinkedList2()
+    node1 = list1.head
+    node2 = list2.head
+    while node1 is not None and node2 is not None:
+        if node1.value <= node2.value:
+            result.add_in_tail(node1)  
+            node1 = node1.next
+        else:
+            result.add_in_tail(node2)  
+            node2 = node2.next
+    while node1 is not None:
+        result.add_in_tail(node1)
+        node1 = node1.next
+    while node2 is not None:
+        result.add_in_tail(node2)
+        node2 = node2.next
+    list1.head = list1.tail = None
+    list2.head = list2.tail = None
+    return result
 
 
 
 2.14.*
+Про dummy узел интересная информация, я поизучал.
+В свободное время поприменяю на простых примерах, чтобы и наверное в свои решения посижу подабовляю фиктивный узел
