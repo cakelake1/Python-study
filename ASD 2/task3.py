@@ -50,8 +50,8 @@ class DynArray:
             raise IndexError('Индекс вне диапазона')
         for j in range(i, self.count - 1):
             self.array[j] = self.array[j+1]
-        self.count -= 1
         self.array[self.count - 1] = None
-        if self.count * 4 <= self.capacity and self.capacity > 16:
+        self.count -= 1
+        if self.count < self.capacity//2 and self.capacity > 16:
             new_capacity = max(16, self.capacity // 2)
             self.resize(new_capacity)
