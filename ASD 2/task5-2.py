@@ -101,3 +101,52 @@ class CircleQueue:
     
     def size(self):
         return self.lenght
+
+# Рефлексия из Задания 3(задача 5*)
+# Динамический массив на основе банковского метода.
+# При добавлении элемента например амортизационные 3 (1 реальные расходы + 2 кладем в банк).При удалении амортизационные 2 (1 + 1).При реаллокации (добавляем N элементов) - из банка списывается N.Когда надо выполнять реаллокацию, вопрос неоднозначный, можно по некоторому порогу в банке, но лучше когда внутренний массив весь заполнен. При уменьшении в реаллокации, в принципе, делать ничего не надо, или например 10% * N списать.
+# Решение и логика верные . списал 10% * N при уменьшении реаллокации. Добвил в решение.
+import ctypes
+
+class DynArrayBank:
+    def __init__(self):
+        self.count = 0
+        self.capacity = 16
+        self.array = self.make_array(self.capacity)
+        self.bank = 0  
+
+    def __len__(self):
+        return self.count
+
+    def make_array(self, new_capacity):
+        return (new_capacity * ctypes.py_object)()
+
+    def __getitem__(self, i):
+        if i < 0 or i >= self.count:
+            raise IndexError('Index is out of bounds')
+        return self.array[i]
+
+    def resize(self, new_capacity):
+        if new_capacity < self.capacity:
+            self.bank -= int(self.count * 0.1)  # 10%* N
+        else:
+            self.bank -= self.count
+        new_array = self.make_array(new_capacity)
+        for i in range(self.count):
+            new_array[i] = self.array[i]
+        self.array = new_array
+        self.capacity = new_capacity
+
+    def append(self, itm):
+        self.bank += 3  
+        if self.count == self.capacity:
+            self.bank -= self.count  
+            self.resize(2 * self.capacity)
+        self.bank -= 1  
+        self.array[self.count] = itm
+        self.count += 1
+
+# Рефлексия из Задания 3(задача 6*)
+# Реализуйте многомерный динамический массив: произвольное количество измерений, при этом каждое измерение может внутри масштабироваться по потребности. В конструкторе задаётся число измерений и размер по каждому из них. Обращаться к такому массиву надо как к обычному многомерному, например: myArr[1,2,3].
+# Многомерный динамический массив
+# Идея, что у нас есть интерфейс добавления элемента в некоторую многомерную позицию (i,j,k,...), а внутри это обычный одномерный динамический массив.Надо просто корректно реализовать операцию добавления элемента (отображение многомерной координаты в линию).Например входной размер массива 3x4x5, создаём одномерный массив длиной 60, и многомерная координата внутри него элементарно определяется.
