@@ -153,12 +153,12 @@ class HashTable:
         self.size = sz
         self.step = stp
         self.slots = [None] * self.size
-        self.salt = random.randint
+        self.salt = random.randint(1, 1000000) # соль
 
     def hash_fun(self, value):
         slot_index = 0
         for char in value:
-            slot_index += ord(char)
+            slot_index += ord(char) + self.salt # добавил соль
         return slot_index % self.size 
         
     def seek_slot(self, value):
