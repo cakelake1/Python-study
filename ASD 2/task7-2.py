@@ -111,59 +111,59 @@ class OrderedStringList(OrderedList):
             return 1
         return 0
 
-print("\nдобавление по убыванию:")
-list2 = OrderedList(False)
-list2.add(5)
-list2.add(1)
-list2.add(3)
-list2.add(7)
-list2.add(2)
-print([node.value for node in list2.get_all()])  #  [7, 5, 3, 2, 1]
 
-print("\nпоиск по возрастанию:")
-list3 = OrderedList(True)
-list3.add(1); list3.add(3); list3.add(5); list3.add(7); list3.add(9)
-print("Найден 5:", list3.find(5).value if list3.find(5) else None)  #  5
-print("Не найден 4:", list3.find(4))  #  None
-print("Не найден 10:", list3.find(10))  #  None
 
-print("\nПоиск по убыванию:")
-list4 = OrderedList(False)
-list4.add(9); list4.add(7); list4.add(5); list4.add(3); list4.add(1)
-print("Найден 5:", list4.find(5).value if list4.find(5) else None)  #  5
-print("Не найден 6:", list4.find(6))  #  None
-print("Не найден 0:", list4.find(0))  #  None
-
-print("\nУдаление по возрастанию:")
-list5 = OrderedList(True)
-list5.add(1); list5.add(2); list5.add(3); list5.add(3); list5.add(4)
-print("До удаления:", [node.value for node in list5.get_all()])
-list5.delete(3)
-print("После удаления первой 3:", [node.value for node in list5.get_all()])  #  [1, 2, 3, 4]
-
-print("\nУдаление по убыванию:")
-list6 = OrderedList(False)
-list6.add(4); list6.add(3); list6.add(3); list6.add(2); list6.add(1)
-print("До удаления:", [node.value for node in list6.get_all()])
-list6.delete(3)
-print("После удаления первой 3:", [node.value for node in list6.get_all()])  #  [4, 3, 2, 1]
-
-print("\nУдаление несуществующего элемента:")
-list7 = OrderedList(True)
-list7.add(1); list7.add(2); list7.add(3)
-print("До удаления:", [node.value for node in list7.get_all()])
-list7.delete(5)  # Не существует
-print("После удаления 5:", [node.value for node in list7.get_all()])  #  [1, 2, 3]
-
-print("\nУдаление из пустого списка:")
-list8 = OrderedList(True)
-list8.delete(1)  # Не должно быть ошибки
-print("Пустой список:", [node.value for node in list8.get_all()])  #  []
-
-# Задания 8-12 со звездочкой я сделаю чуть позже на новогодних каникулах
 #8.* Добавьте метод удаления всех дубликатов из упорядоченного списка.
+    def delete_duplicate(self):
+        if self.head is None:
+            return
+        node = self.head
+        while node is not None and node.next is not None:
+            if self.compare(node.value, node.next.value) != 0:
+                node = node.next
+                continue
+            duplicate = node.next
+            node.next = duplicate.next
+            if duplicate.next:
+                duplicate.next.prev = node
+            else:
+                self.tail = node
+
 
 #9.* Напишите алгоритм слияния двух упорядоченных списков в один, сохраняя порядок элементов. Подумайте, как это сделать наиболее эффективно.
+# Уже было похожее ранее задание, я сравнивал сначала, чтобы списки были одинаково упорядоченные. Затем я сравнивал поэлементно значения в списке и добавлял наименьшее в новый список в цикле, а затем добавлял оставшиеся значения.
+# так как нам нужен алгоритм, то я добавляю дополнитеоьный метод add_in_tail, который в свою очередь, добавляет значение в конец списка, и он выполняется при условии если наши списки упорядоченныые
+    def add_in_tail(self, value):
+        new_node = None(value)
+        if self.head is None:
+            self.head = self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+# и напишем сам метод слияния merge:
+    def merge(self, list2):
+        if self.__ascending != list2.__ascending:
+            raise ValueError("списки не совпадают")
+        result = OrderedList(self.__ascending)
+        node1 = self.head
+        node2 = list2.head
+        while node1 and node2:
+            compare = self.compare(node1.value, node2.value)
+            if (self.__ascending and compare <= 0) or (not self.__ascending and compare >= 0):
+                result.add_in_tail(node1.value)
+                node1 = node1.next
+            else:
+                result.add_in_tail(node2.value)
+                node2 = node2.next
+        while node1:
+            result.add_in_tail(node1.value)
+            node1 = node1.next
+        while node2:
+            result.add_in_tail(node2.value)
+            node2 = node2.next
+        return result
+
 
 #10.* Напишите метод проверки наличия заданного упорядоченного под-списка (параметр метода) в текущем списке.
 
