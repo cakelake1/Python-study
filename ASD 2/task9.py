@@ -9,9 +9,7 @@ class NativeDictionary:
         for char in key:
             slot_index += ord(char)
         return slot_index % self.size 
-            # в качестве key поступают строки!
-            # всегда возвращает корректный индекс слота
-            #return 0
+
 
     def is_key(self, key):
         start_index = self.hash_fun(key)
@@ -22,8 +20,7 @@ class NativeDictionary:
             if self.slots[slot_index] is None:
                 return False
         return False
-            # возвращает True если ключ имеется,
-            # иначе False
+
     
 
     def put(self, key, value):
@@ -39,8 +36,7 @@ class NativeDictionary:
                 return
         self.slots[slot_index] = key
         self.values[slot_index] = value
-            # гарантированно записываем 
-            # значение value по ключу key
+
 
     def get(self, key):
         start_index = self.hash_fun(key)
@@ -51,7 +47,3 @@ class NativeDictionary:
             if self.slots[slot_index] is None:
                 return None
         return None
-
-            # возвращает value для key, 
-            # или None если ключ не найден
-            #return None
