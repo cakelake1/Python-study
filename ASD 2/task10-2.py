@@ -70,9 +70,70 @@ class PowerSet:
                 return False
         return True
 #4.* Добавьте метод, реализующий декартово произведение множеств.
+    def cartesian(self, set2:PowerSet) -> PowerSet:
+        result = PowerSet()
+        for i in self.storage:
+            for j in set2.storage:
+                result.put((i,j))
+        return result
 
 #5.* Напишите функцию, которая находит пересечение любых трёх и более множеств (принимает количество множеств >= 3 в качестве списка).
+    def multiple_sets(sets: list[PowerSet]) -> PowerSet:
+        if len(sets) < 3:
+            raise ValueError('требуется три множества')
+        min_size_set = sets[0]
+        min_size = min_size_set.size()
+        for i in sets[1:]:
+            cur_size = i.size()
+            if cur_size < min_size:
+                min_size = cur_size
+                min_size_set = i
+        result = PowerSet()
+        for i in min_size_set.storage:
+            cross_all = True
+            for j in sets:
+                if j is not min_size_set and not j.get(i):
+                    cross_all = False
+                    break
+            if cross_all:
+                result.put(i)
+        return result
+
 
 #6.* Реализуйте мульти-множество (Bag), в котором каждый элемент может присутствовать несколько раз. Добавьте методы добавления элементов, удаления одного экземпляра элемента и получения списка всех элементов с их частотами (сколько раз встречаются).
+class Bag:
+    def __init__(self):
+        self.storage = {}
 
+    def put(self, value):
+        if value in self.storage:
+            self.storage[value] += 1
+        else:
+            self.storage[value] = 1
+
+    def remove(self, value):
+        if value not in self.storage:
+            return False
+        self.storage[value] -= 1
+        if self.storage[value] == 0:
+            self.storage.pop(value)
+        return True
+
+    def get_elements(self):
+        result = []
+        for value, count in self.storage.items():
+            result.append((value, count))
+        return result
+    
+    def count(self, value):
+        return self.storage.get(value,0)
+    
+    def total_values(self):
+        total = 0
+        for count in self.storage.values():
+            total += count
+        return total
+    
+    def unique_items(self):
+        return len(self.storage)
 #сделаю 19 -22.02

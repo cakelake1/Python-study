@@ -175,3 +175,46 @@ equals_time = time.time() - start
 print(equals_time, result)
     # макисмальное время из всех проверок
 print(max(intersection_time, union_time, difference_time, issubset_time, equals_time))
+
+# 4* Декартово произведение
+set_1 = PowerSet()
+set_2 = PowerSet()
+set_1.put(1)
+set_1.put(2)
+set_1.put(3)
+set_2.put('a')
+set_2.put('b')
+cart_product = set_1.cartesian(set_2)
+print(cart_product.size())
+for i in cart_product.storage:
+    print(i)
+
+# 5* Напишите функцию, которая находит пересечение любых трёх и более множеств (принимает количество множеств >= 3 в качестве списка).
+
+set_3 = PowerSet()
+set_4 = PowerSet()
+set_5 = PowerSet()
+for i in range(1,6): 
+    set_3.put(i)
+for i in range(3,8): 
+    set_4.put(i)
+for i in range(4,6): 
+    set_5.put(i)
+result = multiple_sets([set_3, set_4, set_5])
+print(result.size())
+print(result.storage.keys())    
+
+# 6* Реализуйте мульти-множество (Bag), в котором каждый элемент может присутствовать несколько раз. Добавьте методы добавления элементов, удаления одного экземпляра элемента и получения списка всех элементов с их частотами (сколько раз встречаются).   
+bag = Bag()
+bag.put("яблоко")
+bag.put("банан")
+bag.put("яблоко")
+bag.put("апельсин")
+print(bag.get_elements())
+print(bag.count("яблоко"))  
+print(bag.count("виноград")) 
+print(bag.total_values())  
+print(bag.unique_items()) 
+bag.remove("яблоко")
+print(bag.get_elements())  
+print(bag.total_values())
