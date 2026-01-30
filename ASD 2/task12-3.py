@@ -13,3 +13,18 @@ set3.put(1)
 set3.put(2)
 result_2 = cartesian(set3)
 print(result_2)
+
+# task 11-2 *3
+bloom_filter_1 = BloomFilter3(f_len=32)
+bloom_filter_1.add('1')
+bloom_filter_1.add('2')
+bloom_filter_1.add('3')
+print(bloom_filter_1.is_value('1'))
+print(bloom_filter_1.is_value('2'))
+print(bloom_filter_1.is_value('3'))
+print(bloom_filter_1.is_value('4')) # False
+bloom_filter_1.remove('1')
+print(bloom_filter_1.is_value('1')) # False
+print(bloom_filter_1.is_value('2'))
+bloom_filter_1.add('1')
+print(bloom_filter_1.is_value('1')) # True
