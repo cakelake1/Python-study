@@ -187,4 +187,59 @@ class HashTable:
             slot_index += self.step
             slot_index = slot_index % self.size
         return None
-# доделано 10.01.2026
+# Рефлексия по task 6-2:
+# 3* у меня сложность О(n^2), напишем за О(n):
+def is_palindrome(s):
+    cleaned_list = s.replace(" ", "").lower()
+    left, right = 0, len(cleaned_list) - 1
+    while left < right:
+        if cleaned_list[left] != cleaned_list[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+# 4* Минимальный элемент деки за O(1).
+# мое решение не будет корректно работать, так как удаление элементов с любого конца может удалить минимум. Решим по подсказке:
+from collections import deque
+class Deque_Min:
+    def __init__(self):
+        self.deque = deque()
+        self.min_stack = deque()  
+
+    def addFront(self, item):
+        self.deque.append(item)
+        while self.min_stack and self.min_stack[-1] > item:
+            self.min_stack.pop()
+        self.min_stack.append(item)
+
+    def addTail(self, item):
+        self.deque.appendleft(item)
+        if not self.min_stack or item <= self.min_stack[0]:
+            self.min_stack.appendleft(item)
+        else:
+            self.min_stack.appendleft(self.min_stack[0])
+
+    def removeFront(self):
+        if not self.deque:
+            return None
+        item = self.deque.pop()
+        self.min_stack.pop()
+        return item
+
+    def removeTail(self):
+        if not self.deque:
+            return None
+        item = self.deque.popleft()
+        self.min_stack.popleft()
+        return item
+
+    def size(self):
+        return len(self.deque)
+    
+    def get_min(self):
+        if self.min_stack:
+            return self.min_stack[0]
+        return None
+    
+#6 Двусторонняя очередь на базе динамического массива.
+# Еще раз проверил свое решение, в целом моё решение подходит

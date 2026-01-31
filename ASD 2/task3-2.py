@@ -80,6 +80,10 @@ class DynArrayBank:
         return self.array[i]
 
     def resize(self, new_capacity):
+        if new_capacity < self.capacity:
+            self.bank -= int(self.count * 0.1)  # 10%* N
+        else:
+            self.bank -= self.count
         new_array = self.make_array(new_capacity)
         for i in range(self.count):
             new_array[i] = self.array[i]
@@ -106,3 +110,15 @@ da.bank_info()
 
  5.6 Затрудняюсь с этой задачей, возможно смогу увидеть подсказку в рефлексии, но я примерно представляю как ее решить  
 Реализуйте многомерный динамический массив: произвольное количество измерений, при этом каждое измерение может внутри масштабироваться по потребности. В конструкторе задаётся число измерений и размер по каждому из них. Обращаться к такому массиву надо как к обычному многомерному, например: myArr[1,2,3].
+
+# Рефлексия task1 *8
+# Стоит немного подправить по подсказке, добавим исключение в проверку длин списка
+def sum_linked_lists(list1, list2):
+    if list1.len() != list2.len():
+        raise ValueError("Списки имеют разную длинну")
+    result = LinkedList()
+    node1, node2 = list1.head, list2.head
+    while node1:
+        result.add_in_tail(Node(node1.value + node2.value))
+        node1, node2 = node1.next, node2.next
+    return result

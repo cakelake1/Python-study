@@ -193,5 +193,54 @@ def balance_brackets(stroke):
         return False
     return True
         
-# тут я не успеваю немного с двумя задачами, доделаю 23,24 декабря и дальнейшую рефлексию.
-# доделал только 5 января
+# Рефлексия по 4 заданию
+# task4-2, 4,5* сделал правильно, сложность O(n)
+# task4-2, 7* сделал правильно, сложность O(1) едиснтвенное внес поправику в метод удаления, если оба стеку пустые - возникает ошибка.
+def pop(self):
+    if len(self.stack) == 0:
+        return None
+    result = self.stack.pop
+    if result == self.min_stack[-1]: # было if self.stack[-1] == self.min_stack[-1]
+        self.min_stack.pop()
+    return result
+
+# task4-2, 4,9*Постфиксная запись выражения 
+# Я сделал через копипаст вычисления аргументов, а нужно через лямбда функции в словаре, делаем:
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def size(self):
+        return len(self.stack)
+
+    def pop(self):
+        if len(self.stack) == 0:
+            return None 
+        return self.stack.pop() 
+
+    def push(self, value):
+        self.stack.append(value)
+
+    def peek(self):
+        if len(self.stack) == 0:
+            return None 
+        return self.stack[-1]
+    
+    def postfix_calculator(self, value):
+        dictionary = {
+        '+': lambda a, b: a + b,
+        '-': lambda a, b: a - b,
+        '*': lambda a, b: a * b,
+        }
+        stack = Stack()
+        parts = value.split()
+        for i in parts:
+            if i == '=':
+                return stack.pop()
+            elif i in dictionary:
+                command = dictionary[i]
+                b = stack.pop()
+                a = stack.pop()
+                result = command(a, b)
+                stack.push(result)
+        return stack.pop()
