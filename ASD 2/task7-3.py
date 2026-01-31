@@ -108,3 +108,51 @@ list8 = OrderedList(True)
 for v in [1, 1]: list8.add(v)
 merged4 = list7.merge(list8)
 print([n.value for n in merged4.get_all()])
+
+# * 10 Проверка наличия заданного упорядоченного под-списка в текущем списке.
+list1 = OrderedList2(asc=True)
+for num in [1, 2, 3, 4, 5, 6]:
+    list1.add(num)
+sublist1 = OrderedList2(asc=True)
+for num in [2, 3, 4]:
+    sublist1.add(num)
+print(list1.sublist_contain(sublist1)) 
+sublist2 = OrderedList2(asc=True)
+for num in [3, 4, 6]:
+    sublist2.add(num)
+print(list1.sublist_contain(sublist2))
+
+# 11.* Добавьте метод, который находит наиболее часто встречающееся значение в списке.
+list1 = OrderedList2(asc=True)
+for num in [1, 1, 2, 2, 2, 3]:
+    list1.add(num)
+print([n.value for n in list1.get_all()])
+print(list1.hits_num())  
+list2 = OrderedList2(asc=True)
+for num in [5]:
+    list2.add(num)
+print([n.value for n in list2.get_all()])
+print(list2.hits_num())
+list3 = OrderedList2(asc=True)
+for num in [1, 2, 3, 4, 5]:
+    list3.add(num)
+print([n.value for n in list3.get_all()])
+print(list3.hits_num())
+list4 = OrderedList2(asc=True)
+print(list4.hits_num())
+
+#12.* Добавьте в упорядоченный список возможность найти индекс элемента (параметр) в списке, которая должна работать за o(log N).
+list_1 = OrderedList3(True)
+for val in [10, 20, 30, 40, 50]:
+    list_1.add(val)
+print(list_1.find_index_bin(30))  
+print(list_1.find_index_bin(10))  
+print(list_1.find_index_bin(50))  
+print(list_1.find_index_bin(25))  
+list_2 = OrderedList3(False)
+for val in [50, 40, 30, 20, 10]:
+    list_2.add(val)
+print(list_2.find_index_bin(30))  
+print(list_2.find_index_bin(50))  
+print(list_2.find_index_bin(10))  
+print(list_2.find_index_bin(25))

@@ -27,33 +27,35 @@ print(ht5.find("dog") is None)
 
 # 3,4*
 ht = HashTable(4, 1)
-print(f"Начальный размер: {ht.size}")
+print(ht.size)
 ht = HashTable(4, 1)
 print(ht.size)
 test_data = ["test1", "test2", "test3", "test4", "test5"]
 for i, value in enumerate(test_data):
     print(value)
-    print(f"заполнение_начало: {ht.count}/{ht.size} = {ht.count/ht.size:.0%}")
+    load_1 = ht.count / ht.size 
+    print(load_1:.0%)
     index = ht.put(value)
     print(index)
-    print(f"заполнение_конец: {ht.count}/{ht.size} = {ht.count/ht.size:.0%}")
+    load_2 = ht.count / ht.size
+    print(load_2:.0%)
     if i == 3:
-        print("Видим расширение таблицы")
+        print("расширение таблицы")
 print(ht.size)  
 
 #5*
 ht = HashTable(5, 2)
-print(f"Создана таблица с солью: {ht.salt}")
+print(ht.salt)
 test_data = ["test1", "test2", "test3", "test4", "test5"]
 for v in test_data:
     idx = ht.put(v)
-    print(f" '{v}' {idx}")
+    print(v, idx)
 for v in ["test1", "test3", "test10"]:
     idx = ht.find(v)
     if idx is not None:
-        print(f" '{v}' найден в {idx}")
+        print(v,idx)
     else:
-        print(f" '{v}' не найден")
+        print(v, ' не найден')
 for i in range(ht.size):
     if ht.slots[i] is not None:
-        print(f"  [{i}]: '{ht.slots[i]}'")
+        print([i], {ht.slots[i]})
