@@ -9,4 +9,4 @@
 # def BiggerGreater(input_s): - def get_next_lexicographically_greater(input_s): # пример 9
 # def ShopOLAP(N, items): - def sort_sales_data(N, items): # пример 10
 # def MisterRobot(N, data): - def can_sort_by_triple_rotations(N, data): # пример 11
-# def MaximumDiscount(N, price): - def calculate_maximum_discount(N, price): # пример 11
+# def MaximumDiscount(N, price): - def calculate_maximum_discount(N, price): # пример 12
