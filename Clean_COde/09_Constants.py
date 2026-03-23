@@ -60,16 +60,16 @@
 #     MIN_SIZE = 2 # Задаю стартовое значение в виде константы 1 
 #     DEFAULT_START = 0 # Задаю стартовое значение в виде константы 2
 #     NO_RESULT = None # Задаю стартовое значение в виде константы 3 
-#     max_row = DEFAULT_START # Заменяю стартовое значение константой
-#     max_sum = NO_RESULT # Заменяю стартовое значение константой
-#     max_col = DEFAULT_START # Заменяю стартовое значение константой
-#     max_size = MIN_SIZE # Заменяю стартовое значение константой
+#     max_row = DEFAULT_START # Заменяю стартовое значение константой 4 
+#     max_sum = NO_RESULT # Заменяю стартовое значение константой 5 
+#     max_col = DEFAULT_START # Заменяю стартовое значение константой 6
+#     max_size = MIN_SIZE # Заменяю стартовое значение константой 7
 #     new_matrix = sum_elements(n, matrix)
-#     for size in range(MIN_SIZE, n): # убираю магическое число
+#     for size in range(MIN_SIZE, n): # убираю магическое число 8
 #         for row in range(n - size + 1):
 #             for col in range(n - size + 1):
 #                 current_sum = sum_matrix(new_matrix, row, col, size)
-#                 if max_sum is NO_RESULT or current_sum > max_sum: # заменяю None стартовым значением(константой)
+#                 if max_sum is NO_RESULT or current_sum > max_sum: # заменяю None стартовым значением(константой) 9
 #                     max_sum = current_sum
 #                     max_row, max_col, max_size = row, col, size
 #     return str(max_col) + " " + str(max_row) + " " + str(max_size)
