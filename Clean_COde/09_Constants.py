@@ -63,7 +63,7 @@
 #     max_row = DEFAULT_START # Заменяю стартовое значение константой
 #     max_sum = NO_RESULT # Заменяю стартовое значение константой
 #     max_col = DEFAULT_START # Заменяю стартовое значение константой
-#     max_size = MIN_SIZE # убираю магическое число
+#     max_size = MIN_SIZE # Заменяю стартовое значение константой
 #     new_matrix = sum_elements(n, matrix)
 #     for size in range(MIN_SIZE, n): # убираю магическое число
 #         for row in range(n - size + 1):
