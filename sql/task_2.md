@@ -31,4 +31,4 @@ WHERE (EmployeeID = 2) or (EmployeeID =4) or (EmployeeID = 8)
 3.9.7. Выведите идентификаторы заказов и товаров из таблицы Order Details, для которых цена больше 40, а количество (Quantity) меньше 10.
 
 SELECT OrderID, ProductID FROM [Order Details]
-WHERE UnitPrice > 40 and Quantity < 10
+WHERE (UnitPrice > 40) AND (Quantity < 10)
