@@ -6,10 +6,10 @@ VALUES ('Doronin', 'Nickolay','Sales Manager', 'Mr.','19910510', '20120510', 'Ge
 --12.3.2. Свяжите этого нового пользователя с какой-либо территорией с помощью таблицы EmployeeTerritories (многие-ко-многим).
 
 INSERT INTO EmployeeTerritories(EmployeeID, TerritoryID)
-VALUES ('12', '125007' )
+VALUES (12, '125007' )
 
 --12.3.3. Попробуйте добавить новую запись в таблицу заказов Orders. Возникнут ли какие-либо конфликты?
 
 INSERT INTO Orders(EmployeeID)
-VALUES ('12')
+VALUES (12)
 -- Если я добавляю запись с реальным сотрудником, то кофликтов нет, если добавляю с несуществующим, то возникает конфликт по FK(EmployeeID)
