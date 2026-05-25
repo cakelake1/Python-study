@@ -26,6 +26,15 @@ ADD PRIMARY KEY (RegionID)
 -- и
 ALTER TABLE Territories
 ADD PRIMARY KEY (TerritoryID, RegionID)
--- Проверка по первичному ключу проходит, задание выполнено
+-- и
+ALTER TABLE Territories
+ADD FOREIGN KEY (RegionID) REFERENCES Region(RegionID)
+-- Проверка по первичному ключу проходит, дальше пробуем вставить несуществующий регион и получаем ошибку -  задание выполнено
+INSERT INTO Territories (TerritoryID, TerritoryDescription, RegionID)
+VALUES ('99999', 'ошибка', 99);
+--Сообщение 547, уровень 16, состояние 0, строка 1
+--Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK__Territori__Regio__02084FDA". Конфликт произошел в базе данных "MyTest", таблица "dbo.Region", column 'RegionID'.
+--Выполнение данной инструкции было прервано.
+
 
 
