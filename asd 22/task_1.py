@@ -1,30 +1,26 @@
 class SimpleTreeNode:
 	
     def __init__(self, val, parent):
-        self.NodeValue = val # значение в узле
-        self.Parent = parent # родитель или None для корня
-        self.Children = [] # список дочерних узлов
+        self.NodeValue = val 
+        self.Parent = parent 
+        self.Children = [] 
 	
 class SimpleTree:
 
     def __init__(self, root):
-        self.Root = root # корень, может быть None
+        self.Root = root 
 	
     def AddChild(self, ParentNode, NewChild):
-        #if ParentNode is None:
-            #return False
         ParentNode.Children.append(NewChild)
         NewChild.Parent = ParentNode
-        return True # ваш код добавления нового дочернего узла существующему ParentNode
-  
+        self.UpdateLevelNode(NewChild, ParentNode.Level + 1)
+        return True 
+    
     def DeleteNode(self, NodeToDelete):
         NodeToDelete.Parent.Children.remove(NodeToDelete)
         NodeToDelete.Parent = None
-        pass # ваш код удаления существующего узла NodeToDelete
 
     def GetAllNodes(self):
-        #if self.Root is None:
-            #return []
         result = []
         def GetAllNodesRec(node):
             result.append(node)
@@ -32,11 +28,8 @@ class SimpleTree:
                 GetAllNodesRec(i)
         GetAllNodesRec(self.Root)
         return result
-        # ваш код выдачи всех узлов дерева в определённом порядке
 
     def FindNodesByValue(self, val):
-        #if self.Root is None:
-            #return []
         result = []
         def FindNodesByValueRec(node):
             if node.NodeValue == val:
@@ -44,14 +37,11 @@ class SimpleTree:
             for i in node.Children:
                 FindNodesByValueRec(i)
         FindNodesByValueRec(self.Root)
-        # ваш код поиска узлов по значению
         return result
    
     def MoveNode(self, OriginalNode, NewParent):
         self.DeleteNode(OriginalNode)
         self.AddChild(NewParent, OriginalNode) 
-        # в качестве дочернего для узла NewParent
-        pass  
    
     def Count(self):
         TreeNodes = self.GetAllNodes()
