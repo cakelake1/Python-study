@@ -13,7 +13,6 @@ class SimpleTree:
     def AddChild(self, ParentNode, NewChild):
         ParentNode.Children.append(NewChild)
         NewChild.Parent = ParentNode
-        self.UpdateLevelNode(NewChild, ParentNode.Level + 1)
         return True 
     
     def DeleteNode(self, NodeToDelete):
