@@ -143,6 +143,143 @@ class BST:
             return result
         return recursive_count(self.Root)
     
+    def IsIdenticalTrees(self, new_tree):
+        def recursive_idl(tree1, tree2):
+            if tree1 is None and tree2 is None:
+                return True
+            if tree1 is None or tree2 is None:
+                return False
+            if tree1.NodeKey != tree2.NodeKey or tree1.NodeValue != tree2.NodeValue:
+                return False
+            left_idl = recursive_idl(tree1.LeftChild, tree2.LeftChild)
+            right_idl = recursive_idl(tree1.RightChild, tree2.RightChild)
+            if left_idl and right_idl:
+                return True
+            else:
+                return False
+        return recursive_idl(self.Root, new_tree.Root)
+    
+    def Paths(self, path_length):
+        result = []
+        def recursive_paths(node, cur_path):
+            if node is None:
+                return
+            cur_path.append(node)
+            if node.LeftChild is None and node.RightChild is None:
+                if len(cur_path) - 1 == path_length:
+                    result.append(cur_path.copy())
+            recursive_paths(node.LeftChild, cur_path)
+            recursive_paths(node.RightChild, cur_path)
+            cur_path.pop()
+        if self.Root is not None:
+            recursive_paths(self.Root, []) 
+        return result
+    
+    def CountMaxSumPaths(self):
+        max_sum = float('-inf')
+        count = 0
+        def recursive_paths(node, cur_sum):
+            nonlocal max_sum, count
+            if node is None:
+                return
+            cur_sum += node.NodeValue
+            if node.LeftChild is None and node.RightChild is None:
+                if cur_sum > max_sum:
+                    max_sum = cur_sum
+                    count = 1
+                elif cur_sum == max_sum:
+                    count += 1
+                return
+            recursive_paths(node.LeftChild, cur_sum)
+            recursive_paths(node.RightChild, cur_sum)
+        if self.Root is not None:
+            recursive_paths(self.Root, 0)
+        return count
+    
+    def SymmTrees(self):
+        def recursive_symm(tree1, tree2):
+            if tree1 is None and tree2 is None:
+                return True
+            if tree1 is None or tree2 is None:
+                return False
+            if tree1.NodeKey != tree2.NodeKey or tree1.NodeValue != tree2.NodeValue:
+                return False
+            left_symm = recursive_symm(tree1.LeftChild, tree2.RightChild)
+            right_symm = recursive_symm(tree1.RightChild, tree2.LeftChild)
+            if left_symm and right_symm:
+                return True
+            else:
+                return False
+        return recursive_symm(self.Root.LeftChild, self.Root.RightChild)
+    
+
+
+
+# новое дерево
+tree = BST(BSTNode(10, 10, None))
+tree.AddKeyValue(5, 5)
+tree.AddKeyValue(15, 15)
+tree.AddKeyValue(3, 3)
+tree.AddKeyValue(7, 7)
+tree.AddKeyValue(12, 12)
+tree.AddKeyValue(18, 18)
+
+
+# Тест 1*
+tree_copy = BST(BSTNode(10, 10, None))
+tree_copy.AddKeyValue(5, 5)
+tree_copy.AddKeyValue(15, 15)
+tree_copy.AddKeyValue(3, 3)
+tree_copy.AddKeyValue(7, 7)
+tree_copy.AddKeyValue(12, 12)
+tree_copy.AddKeyValue(18, 18)
+print("Одинаковые деревья?", tree.IsIdenticalTrees(tree_copy) == True)
+
+tree_diff = BST(BSTNode(10, 10, None))
+tree_diff.AddKeyValue(5, 5)
+tree_diff.AddKeyValue(20, 20)
+print("  Разные деревья?", tree.IsIdenticalTrees(tree_diff) == False)
+
+# Тест 2*
+paths1 = tree.Paths(1)
+print("Путей длины 1?", len(paths1) == 0)
+paths2 = tree.Paths(2)
+print("Путей длины 2?", len(paths2) == 4)
+paths3 = tree.Paths(3)
+print("Путей длины 3?", len(paths3) == 0)
+
+# 3. Тест 3*
+print("количечство максимальных путей", tree.CountMaxSumPaths() == 1)
+
+# Дерево с двумя максимальными путями
+root2 = BSTNode(10, 10, None)
+left = BSTNode(20, 20, root2)
+root2.LeftChild = left
+left.LeftChild = BSTNode(5, 5, left)
+right = BSTNode(20, 20, root2)
+root2.RightChild = right
+right.RightChild = BSTNode(5, 5, right)
+tree2 = BST(root2)
+print("Два макс пути?", tree2.CountMaxSumPaths() == 2)
+
+# 4. Тест 4*
+sym = BST(BSTNode(10, 10, None))
+sym.Root.LeftChild = BSTNode(5, 5, sym.Root)
+sym.Root.RightChild = BSTNode(5, 5, sym.Root)
+sym.Root.LeftChild.LeftChild = BSTNode(3, 3, sym.Root.LeftChild)
+sym.Root.LeftChild.RightChild = BSTNode(7, 7, sym.Root.LeftChild)
+sym.Root.RightChild.LeftChild = BSTNode(7, 7, sym.Root.RightChild)
+sym.Root.RightChild.RightChild = BSTNode(3, 3, sym.Root.RightChild)
+print("Симметричные деревья?", sym.SymmTrees() == True)
+
+non_sym = BST(BSTNode(10, 10, None))
+non_sym.AddKeyValue(5, 5)
+non_sym.AddKeyValue(15, 15)
+print("Несимметричные?", non_sym.SymmTrees() == False)
+
+
+    
+""""    
     #тест: проверяем поиск отсутствующего ключа в двух вариантах (запрошенный ключ добавляем либо левому, либо правому потомку) и поиск присутствующего ключа)
     #(тесты: проверяем исходное отсутствие узла по такому ключу в дереве и его наличие после добавления, в двух вариантах -- левым или правым узлом родителя, а также попытку добавления ключа, которое уже имеется в дереве, в таком случае ничего с деревом не делаем)
 #(тест, 4 варианта: поиск начиная с корня и поиск начиная с поддерева, ищем максимальный и минимальный ключ)
@@ -184,12 +321,12 @@ print("Макс от корня -> 18?", tree.FinMinMax(tree.Root, True).NodeKey
 print("Мин от правого поддерева (15) -> 12?", tree.FinMinMax(tree.Root.RightChild, False).NodeKey == 12)
 print("Макс от левого поддерева (5) -> 8?", tree.FinMinMax(tree.Root.LeftChild, True).NodeKey == 8)
 
-# Тест 8: удаление листа (2)
+# удаление листа 2
 tree.DeleteNodeByKey(2)
 r = tree.FindNodeByKey(2)
 print("2 удалён?", r.NodeHasKey == False)
 
-# Тест 9: удаление с одним потомком (сначала убьём 12, чтобы у 15 остался только 18)
+# удаление с одним потомком (сначала убьём 12, чтобы у 15 остался только 18)
 tree.DeleteNodeByKey(12)
 tree.DeleteNodeByKey(15)
 r = tree.FindNodeByKey(15)
@@ -198,15 +335,19 @@ print("18 теперь прямо под корнем?", tree.Root.RightChild.No
 
 tree.DeleteNodeByKey(5)
 r = tree.FindNodeByKey(5)
-print("5 удалён?", not r.NodeHasKey)
-# Проверяем, что на место 5 встал минимальный из правого поддерева (7)
+print("5 удалён?", r.NodeHasKey == False)
+# Проверяем, что на место 5 встал минимальный из правого поддерева 7
 print("На месте 5 теперь 7?", tree.Root.LeftChild.NodeKey == 7)
 print("Левый потомок 7 = 3?", tree.Root.LeftChild.LeftChild.NodeKey == 3)
 print("Правый потомок 7 = 8?", tree.Root.LeftChild.RightChild.NodeKey == 8)
 
-# Тест 11: удаление отсутствующего
+# граничный тесты
+# удаление отсутствующего
 print("Удаление 999 вернуло False?", tree.DeleteNodeByKey(999) == False)
 
-# Тест 12: удаление из пустого
+# удаление из пустого
 empty2 = BST(None)
 print("Удаление из пустого вернуло False?", empty2.DeleteNodeByKey(42) == False)
+"""
+
+
