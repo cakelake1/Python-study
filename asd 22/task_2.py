@@ -11,6 +11,7 @@ class BSTNode:
 class BSTFind:
 
     def __init__(self):
+        self.Node = None
         self.NodeHasKey = False 
         self.ToLeft = False 
 
