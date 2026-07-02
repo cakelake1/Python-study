@@ -51,6 +51,9 @@ class BST:
         if result.NodeHasKey:
             return False
         new_node = BSTNode(key, val, result.Node)
+        if result.Node is None:
+            self.Root = new_node
+            return True
         if result.ToLeft:
             result.Node.LeftChild = new_node
         else:
