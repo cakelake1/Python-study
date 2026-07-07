@@ -5,7 +5,7 @@ class BSTNode:
         self.NodeValue = val # значение в узле
         self.Parent = parent # родитель или None для корня
         self.LeftChild = None # левый потомок
-        self.RightChild = None # правый потомок
+        self.RightChild = None 
 
 
 class BSTFind:
