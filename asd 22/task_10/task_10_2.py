@@ -52,6 +52,22 @@ def IsConnected(self):
             return False
     return True
 
-
 # *10.2 В ориентированном графе найдите длину самого длинного простого пути/
-
+def LongestPath(self):
+    max_path = 0
+    for i in range(self.max_vertex):
+        if self.vertex[i] is not None:
+            visited = [False] * self.max_vertex
+            path_length = self.dfs_longest_path(i, visited)
+            max_path = max(max_path, path_length)
+    return max_path
+def dfs_longest_path(self, curr, visited):
+    visited[curr] = True
+    max_len = 0
+    for nearby in range(self.max_vertex):
+        if self.m_adjacency[curr][nearby] > 0 and not visited[nearby]:
+            if self.vertex[nearby] is not None:
+                path_len = self.dfs_longest_path(nearby, visited)
+                max_len = max(max_len, path_len)
+    visited[curr] = False
+    return max_len + 1
