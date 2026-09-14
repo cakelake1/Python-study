@@ -1,4 +1,3 @@
-from collections import deque
 from itertools  import combinations
 class Vertex:
 
@@ -63,31 +62,6 @@ class SimpleGraph:
         for v in self.vertex:
             if v is not None:
                 v.Hit = False
-    def BreadthFirstSearch(self, VFrom, VTo):
-        if not self.is_good_Vertex(VFrom) or not self.is_good_Vertex(VTo):
-            return []
-        self._vertex_unvisited()
-        if VFrom == VTo:
-            return  [self.vertex[VFrom]]
-        i_deq = deque([[VFrom,[]]])
-        return self._breadthfirstSearch(VTo, i_deq)
-    def _breadthfirstSearch(self, v_to, deq):
-        if not deq:
-            return []
-        cur_idx, cur_path = deq.popleft()
-        cur_vertex = self.vertex[cur_idx]
-        if cur_idx == v_to:
-            return cur_path + [cur_vertex]
-        cur_vertex.Hit = True
-        for nearby_idx in range(self.max_vertex):
-            if not self.m_adjacency[cur_idx][nearby_idx]:
-                continue
-            if self.vertex[nearby_idx].Hit:
-                continue
-            self.vertex[nearby_idx].Hit = True
-            nearby_path = cur_path + [cur_vertex]
-            deq.append([nearby_idx,nearby_path])
-        return self._breadthfirstSearch(v_to, deq)
     def WeakVertices(self):
         weak_vertices = []
         for i, node in enumerate(self.vertex):
