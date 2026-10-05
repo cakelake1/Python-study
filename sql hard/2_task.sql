@@ -56,7 +56,37 @@ SELECT
         )
     ) AS related_entities
     FROM workshops f
-
-
-
 --Задача 4: Данные о военном отряде с составом и операциями
+SELECT
+    f.squad_id,
+    f.name,
+    f.formation_type,
+    f.leader_id,
+    JSON_OBJECT(
+        'member_ids',(
+            SELECT JSON_ARRAYAGG(m.dwarf_id)
+            FROM squad_members m
+            WHERE m.squad_id = f.squad_id
+        ),
+        'equipment_ids',(
+            SELECT JSON_ARRAYAGG(e.equipment_id)
+            FROM squad_equipment e
+            WHERE e.squad_id = f.squad_id
+        ),
+        'operation_ids',(
+            SELECT JSON_ARRAYAGG(o.operation_id)
+            FROM squad_operations o
+            WHERE o.squad_id = f.squad_id
+        ),
+        'training_schedule_ids',(
+            SELECT JSON_ARRAYAGG(t.schedule_id)
+            FROM squad_training t
+            WHERE t.squad_id = f.squad_id
+        ),
+        'battle_report_ids',(
+            SELECT JSON_ARRAYAGG(b.report_id)
+            FROM squad_battles b
+            WHERE b.squad_id = f.squad_id
+        )
+    ) AS related_entities
+FROM military_squads f;
