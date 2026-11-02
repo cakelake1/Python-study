@@ -22,7 +22,7 @@ WITH attack_base AS(
         c.type AS creature_type,
         c.threat_level,
         c.estimated_population,
-        l.name AS zone_nameб
+        l.name AS zone_name,
         l.fortification_level,
         l.wall_integrity
     FROM creature_attacks ca
@@ -63,15 +63,15 @@ vulnerability AS (
 ),
 defense_eff AS(
     SELECT
-        ab.defense_structured_used AS defense_type,
+        ab.defense_structures_used AS defense_type,
         ROUND(SUM(CASE WHEN ab.outcome = 'Repelled' THEN 1 ELSE 0 END)::DECIMAL / NULLIF(COUNT(ab.attack_id), 0) * 100, 2) AS effectiveness_rate,
         ROUND(AVG(ab.enemy_casualties), 1) AS avg_enemy_casualties,
         (SELECT JSON_ARRAYAGG(ds.structure_id ORDER BY ds.structure_id)
         FROM defense_structures ds
-        WHERE ds.defense_type = ab.defense_structured_used) AS structure_ids
+        WHERE ds.defense_type = ab.defense_structures_used) AS structure_ids
     FROM attack_base ab
-    WHERE ab.defense_structured_used > 0
-    GROUP BY ab.defense_structured_used
+    WHERE ab.defense_structures_used IS NOT NULL
+    GROUP BY ab.defense_structures_used
 ),
 squad_readiness AS(
     SELECT
@@ -120,8 +120,8 @@ SELECT JSON_OBJECT(
         FROM attack_base
         ),
     'overall_defense_success_rate', (
-        SELECT(ROUND(SUM(CASE WHEN outcome = 'Repelled' THEN 1 ELSE 0 END)::DECIMAL/NULLIF(COUNT(attack_id), 0) * 100, 2) 
-        FROM attack_base)
+        SELECT ROUND(SUM(CASE WHEN outcome = 'Repelled' THEN 1 ELSE 0 END)::DECIMAL/NULLIF(COUNT(attack_id), 0) * 100, 2) 
+        FROM attack_base
         ),
     'current_threat_level', NULL, -- не нашел информации, нужно проверить в эталонном решении
     'active_threats', (
@@ -207,4 +207,4 @@ SELECT JSON_OBJECT(
         FROM security_evo se
     )
 ) AS result
-FROM (SELECT 1) AS dummy
+FROM (SELECT 1) AS dummy;
