@@ -23,7 +23,7 @@
 Разбираем подробно:
 
 
-1.Структура(грубая ошибка) у меня active_threats, vulnerability_analysis, defense_effectiveness, military_readiness_assessment, security_evolution на верхнем уровне, а также отсутствует security_analysis и threat_assessment - не сравнил или неправильно сравнил свой вывод с выводом из примера
+1. Структура(грубая ошибка) у меня active_threats, vulnerability_analysis, defense_effectiveness, military_readiness_assessment, security_evolution на верхнем уровне, а также отсутствует security_analysis и threat_assessment - не сравнил или неправильно сравнил свой вывод с выводом из примера
 
 2. Не написал четыре основные формулы: current_threat_level, vulnerability_score, readiness_score и year_over_year_improvement, потому что знал, что они 100% у меня не совпадут с эталоном. - лучше ошибиться и сделать, чем не доделать - моя ошибка.
 
